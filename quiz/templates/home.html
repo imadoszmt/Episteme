@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %}
+<header>
+    <h1>Episteme Quiz</h1>
+    <nav>
+        <a href="/login">Login</a>
+        <a href="/signup">Sign Up</a>
+        <a href="/about">About</a>
+        <a href="/categories">Categories</a>
+    </nav>
+</header>
+
+<section class="hero">
+    <h2>Enhance Your Knowledge with Episteme Quiz</h2>
+    <a href="/quiz" class="start-quiz-button">Start Quiz Now</a>
+</section>
+
+<section class="categories">
+    <h2>Quiz Categories</h2>
+    <div class="category-grid">
+        <!-- Dynamically generate categories here -->
+        <div class="category">
+            <span class="icon">📚</span>
+            <h3>Mathematics</h3>
+            <p>Test your knowledge in mathematics with our curated questions.</p>
+        </div>
+        <!-- Repeat for other categories -->
+    </div>
+</section>
+
+<footer>
+    <p>© 2024 Episteme. All rights reserved.</p>
+</footer>
+{% endblock %}
