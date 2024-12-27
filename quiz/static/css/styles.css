@@ -1,34 +1,30 @@
 :root {
-    /* Claude AI Color Palette */
-    --primary: #5E44FF;
-    --primary-hover: #4935E8;
-    --secondary: #F3F3F7;
-    --accent: #E5E5F7;
-    --text-primary: #1A1A1A;
+    --primary: #8A6534;
+    --primary-hover: #735425;
+    --secondary: #F6F5F1;
+    --accent: #EDE8E1;
+    --text-primary: #2D2D2D;
     --text-secondary: #666666;
     --success: #2E8B57;
     --error: #DC3545;
     --warning: #FFC107;
     --info: #17A2B8;
-    
-    /* Light Theme Default */
     --bg-primary: #FFFFFF;
-    --bg-secondary: #F8F9FA;
-    --border-color: #E9ECEF;
+    --bg-secondary: #F8F7F4;
+    --border-color: #E6E1D9;
 }
 
-/* Dark Theme Colors */
 [data-theme="dark"] {
-    --bg-primary: #1A1A1A;
+    --bg-primary: #1F1F1F;
     --bg-secondary: #2D2D2D;
-    --text-primary: #FFFFFF;
+    --text-primary: #F6F5F1;
     --text-secondary: #B3B3B3;
     --border-color: #404040;
-    --accent: #2D2D2D;
+    --accent: #3D3D3D;
 }
 
 /* Base Styles */
-body {
+body,html {
     font-family: 'Inter', sans-serif;
     color: var(--text-primary);
     background-color: var(--bg-secondary);
@@ -59,7 +55,7 @@ a:hover {
 .btn-primary {
     background-color: var(--primary);
     border-color: var(--primary);
-    color: white;
+    color: #F6F5F1;
     padding: 0.5rem 1.5rem;
     border-radius: 0.375rem;
     transition: all 0.2s ease;
@@ -92,13 +88,50 @@ a:hover {
     box-shadow: 0 0 0 0.2rem rgba(94, 68, 255, 0.25);
 }
 
+/* Hero Section */
+.hero-section {
+    position: relative;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: var(--text-primary);
+    overflow: hidden;
+}
+
+.hero-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('/static/images/episteme-statue.jpg');
+    background-size: cover;
+    opacity: 0.1;
+    filter: sepia(20%) contrast(90%);
+    z-index: 0;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
 /* Cards */
 .card {
-    background-color: var(--bg-primary);
+    background: linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.95),
+        rgba(246, 245, 241, 0.9)
+    );
     border: 1px solid var(--border-color);
     border-radius: 0.5rem;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
     height: 100%;
+    box-shadow: 0 2px 8px rgba(138, 101, 52, 0.05);
 }
 
 .card:hover {
@@ -106,7 +139,34 @@ a:hover {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-/* Quiz-specific styles */
+/* Navigation */
+.navbar {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+}
+
+/* Dark Theme Overrides */
+[data-theme="dark"] .hero-section {
+    background: linear-gradient(
+        45deg,
+        rgba(31, 31, 31, 0.95),
+        rgba(45, 45, 45, 0.9)
+    );
+}
+
+[data-theme="dark"] .card {
+    background: linear-gradient(
+        135deg,
+        rgba(45, 45, 45, 0.95),
+        rgba(31, 31, 31, 0.9)
+    );
+}
+
+[data-theme="dark"] .navbar {
+    background: rgba(31, 31, 31, 0.8);
+}
+
+/* Quiz Elements */
 .question-card {
     padding: 2rem;
     margin-bottom: 1.5rem;
@@ -131,7 +191,7 @@ a:hover {
     border-color: var(--primary);
 }
 
-/* Progress bar */
+/* Progress Bar */
 .progress {
     height: 0.5rem;
     background-color: var(--secondary);
@@ -142,19 +202,71 @@ a:hover {
     background-color: var(--primary);
 }
 
-/* Theme toggle */
-.theme-toggle {
-    background: none;
-    border: none;
+/* Footer */
+.footer {
+    background: var(--bg-secondary);
+    flex-shrink: 0;
+    margin-top: auto;
+}
+
+/* Authentication */
+.auth-container {
+    background: var(--bg-primary);
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+    margin: 2rem auto;
+}
+
+.auth-input-group {
+    margin-bottom: 1.5rem;
+}
+
+.auth-input {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.2s ease;
+    background: var(--bg-primary);
     color: var(--text-primary);
-    padding: 0.5rem;
 }
 
-.theme-toggle:hover {
-    color: var(--primary);
+.auth-input:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 0.2rem rgba(138, 101, 52, 0.25);
+    outline: none;
 }
 
-/* Responsive adjustments */
+/* Dark theme overrides for auth pages */
+[data-theme="dark"] .auth-container {
+    background: var(--bg-secondary);
+}
+
+[data-theme="dark"] .auth-input {
+    background: var(--bg-secondary);
+    border-color: var(--border-color);
+}
+
+[data-theme="dark"] .hero-section {
+    background: linear-gradient(
+        45deg,
+        rgba(31, 31, 31, 0.95),
+        rgba(45, 45, 45, 0.9)
+    );
+}
+
+/* Form error messages */
+.errorlist {
+    color: var(--error);
+    list-style: none;
+    padding: 0;
+    margin: 0.5rem 0;
+    font-size: 0.875rem;
+}
+
+/* Responsive */
 @media (max-width: 768px) {
     .container {
         padding-left: 1rem;
@@ -164,109 +276,4 @@ a:hover {
     .question-card {
         padding: 1.5rem;
     }
-}
-
-/* Add these styles for the hero section */
-.hero-section {
-    position: relative;
-    min-height: 70vh;
-    padding: 6rem 2rem;
-    background-color: var(--bg-primary);
-    overflow: hidden;
-    margin-bottom: 3rem;
-}
-
-.hero-section::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-image: url('/static/images/episteme-statue.jpg');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    opacity: 0.15;
-    z-index: 0;
-    filter: grayscale(30%);
-}
-
-.hero-content {
-    position: relative;
-    z-index: 2;
-    max-width: 800px;
-    margin: 0 auto;
-}
-
-.hero-section::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(
-        45deg,
-        rgba(255, 255, 255, 0.95) 0%,
-        rgba(255, 255, 255, 0.85) 100%
-    );
-    z-index: 1;
-}
-
-/* Main content layout */
-.container {
-    position: relative;
-    z-index: 3;
-}
-
-/* Footer positioning */
-body {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-}
-
-main {
-    flex: 1 0 auto;
-}
-
-.footer {
-    flex-shrink: 0;
-    margin-top: auto;
-}
-
-/* Card grid layout */
-.row.g-4.mt-4 {
-    margin-bottom: 3rem;
-}
-
-/* Update card styles */
-.card {
-    backdrop-filter: blur(10px);
-    background-color: rgba(255, 255, 255, 0.95);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-    height: 100%;
-}
-
-/* Dark mode adjustments */
-[data-theme="dark"] .hero-section::after {
-    background: linear-gradient(
-        45deg,
-        rgba(26, 26, 26, 0.95) 0%,
-        rgba(26, 26, 26, 0.85) 100%
-    );
-}
-
-[data-theme="dark"] .hero-section h1 {
-    color: var(--text-primary);
-}
-
-[data-theme="dark"] .hero-section p {
-    color: var(--text-secondary);
-}
-
-[data-theme="dark"] .card {
-    background-color: rgba(45, 45, 45, 0.95);
 }

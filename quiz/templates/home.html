@@ -1,7 +1,14 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
-<div class="hero-section text-center">
+<div class="hero-section text-center" style="
+    background: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)), 
+    url("{% static 'images/episteme-statue.jpg' %}") no-repeat center center;
+    background-size: cover;
+    padding: 6rem 0;
+    margin-bottom: 2rem;
+">
     <div class="hero-content">
         <h1 class="display-4">Welcome to Episteme</h1>
         <p class="lead">Expand your knowledge through interactive quizzes</p>
@@ -70,4 +77,4 @@
         </div>
     </div>
 </div>
-{% endblock %}
+{% endblock content %}

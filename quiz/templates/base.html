@@ -1,4 +1,6 @@
 {% load static %}
+{% load django_bootstrap5 %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,6 +17,9 @@
     <!-- Custom CSS -->
     <link href="{% static 'css/styles.css' %}" rel="stylesheet">
     {% block extra_css %}{% endblock %}
+
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
 </head>
 <body class="bg-light" data-theme="light">
     <!-- Navigation -->
