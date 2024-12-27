@@ -33,6 +33,9 @@ body {
     color: var(--text-primary);
     background-color: var(--bg-secondary);
     line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
 /* Typography */
@@ -95,6 +98,7 @@ a:hover {
     border: 1px solid var(--border-color);
     border-radius: 0.5rem;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
+    height: 100%;
 }
 
 .card:hover {
@@ -160,4 +164,109 @@ a:hover {
     .question-card {
         padding: 1.5rem;
     }
+}
+
+/* Add these styles for the hero section */
+.hero-section {
+    position: relative;
+    min-height: 70vh;
+    padding: 6rem 2rem;
+    background-color: var(--bg-primary);
+    overflow: hidden;
+    margin-bottom: 3rem;
+}
+
+.hero-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('/static/images/episteme-statue.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.15;
+    z-index: 0;
+    filter: grayscale(30%);
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.hero-section::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+        45deg,
+        rgba(255, 255, 255, 0.95) 0%,
+        rgba(255, 255, 255, 0.85) 100%
+    );
+    z-index: 1;
+}
+
+/* Main content layout */
+.container {
+    position: relative;
+    z-index: 3;
+}
+
+/* Footer positioning */
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1 0 auto;
+}
+
+.footer {
+    flex-shrink: 0;
+    margin-top: auto;
+}
+
+/* Card grid layout */
+.row.g-4.mt-4 {
+    margin-bottom: 3rem;
+}
+
+/* Update card styles */
+.card {
+    backdrop-filter: blur(10px);
+    background-color: rgba(255, 255, 255, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    height: 100%;
+}
+
+/* Dark mode adjustments */
+[data-theme="dark"] .hero-section::after {
+    background: linear-gradient(
+        45deg,
+        rgba(26, 26, 26, 0.95) 0%,
+        rgba(26, 26, 26, 0.85) 100%
+    );
+}
+
+[data-theme="dark"] .hero-section h1 {
+    color: var(--text-primary);
+}
+
+[data-theme="dark"] .hero-section p {
+    color: var(--text-secondary);
+}
+
+[data-theme="dark"] .card {
+    background-color: rgba(45, 45, 45, 0.95);
 }

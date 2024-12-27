@@ -43,3 +43,29 @@ REST_FRAMEWORK = {
 } 
 
 SITE_ID = 1
+
+LOGIN_REDIRECT_URL = 'quiz:home'
+LOGOUT_REDIRECT_URL = 'quiz:home'
+LOGIN_URL = 'account_login'
+
+# Email settings (for development)
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+# Media files
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+# django-allauth settings
+ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_EMAIL_VERIFICATION = 'optional'
+ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE = True
+ACCOUNT_USERNAME_MIN_LENGTH = 4
+
+import os
+
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'quiz/static'),
+]
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
