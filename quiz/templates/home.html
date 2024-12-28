@@ -2,79 +2,70 @@
 {% load static %}
 
 {% block content %}
-<div class="hero-section text-center" style="
-    background: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)), 
-    url("{% static 'images/episteme-statue.jpg' %}") no-repeat center center;
-    background-size: cover;
-    padding: 6rem 0;
-    margin-bottom: 2rem;
-">
-    <div class="hero-content">
-        <h1 class="display-4">Welcome to Episteme</h1>
-        <p class="lead">Expand your knowledge through interactive quizzes</p>
+<section class="hero-section">
+    <div class="container">
+        <h1 class="hero-title">Welcome to Episteme</h1>
+        <p class="hero-subtitle">Expand your knowledge through interactive quizzes and Unlock the joy of learning through engaging quizzes that spark curiosity and inspire growth.</p>
         {% if user.is_authenticated %}
-            <a href="{% url 'quiz:quiz_detail' 1 %}" class="btn btn-primary btn-lg">Start Learning</a>
+            <a href="{% url 'quiz:quiz_list' %}" class="btn btn-primary btn-lg">Start Learning</a>
         {% else %}
-            <a href="{% url 'account_signup' %}" class="btn btn-primary btn-lg">Get Started</a>
+            <a href="{% url 'account_signup' %}" class="btn btn-primary btn-lg me-3">Get Started</a>
+            <a href="{% url 'quiz:quiz_list' %}" class="btn btn-outline-primary btn-lg">Browse Quizzes</a>
         {% endif %}
     </div>
-</div>
+</section>
 
-<div class="row g-4 mt-4">
-    <div class="col-md-4">
-        <div class="card h-100">
-            <div class="card-body">
-                <h3>Featured Quizzes</h3>
-                <ul class="list-unstyled">
-                    {% for quiz in featured_quizzes %}
-                        <li class="mb-3">
-                            <a href="{% url 'quiz_detail' quiz.id %}" class="d-flex align-items-center">
-                                <div class="ms-3">
-                                    <h5 class="mb-1">{{ quiz.title }}</h5>
-                                    <small class="text-muted">{{ quiz.questions.count }} questions</small>
-                                </div>
-                            </a>
-                        </li>
-                    {% empty %}
-                        <li>No featured quizzes available</li>
-                    {% endfor %}
-                </ul>
+<section class="py-5 bg-secondary">
+    <div class="container">
+        <h2 class="text-center mb-5">Featured Quizzes</h2>
+        <div class="row g-4">
+            {% for quiz in featured_quizzes %}
+            <div class="col-md-4">
+                <div class="card course-card">
+                    <span class="course-badge">{{ quiz.category }}</span>
+                    <h3 class="course-title">{{ quiz.title }}</h3>
+                    <p class="course-description">{{ quiz.description }}</p>
+                    <div class="course-meta">
+                        <div class="meta-item">
+                            <i class="bi bi-clock"></i>
+                            <span>{{ quiz.duration }} mins</span>
+                        </div>
+                        <a href="{% url 'quiz:start_quiz' quiz.id %}" class="btn btn-sm btn-primary">Start Quiz</a>
+                    </div>
+                </div>
             </div>
+            {% endfor %}
         </div>
     </div>
+</section>
 
-    <div class="col-md-4">
-        <div class="card h-100">
-            <div class="card-body">
-                <h3>Categories</h3>
-                <div class="d-flex flex-wrap gap-2">
-                    {% for category in categories %}
-                        <a href="{% url 'category_detail' category.slug %}" 
-                           class="badge bg-secondary text-decoration-none">
-                            {{ category.name }}
-                        </a>
-                    {% endfor %}
+<section class="py-5">
+    <div class="container">
+        <h2 class="text-center mb-5">Why Choose Episteme?</h2>
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="card h-100 text-center p-4">
+                    <i class="bi bi-lightbulb display-4 text-primary mb-3"></i>
+                    <h3 class="h4">Embrace Knowledge with Ease</h3>
+                    <p>Engage in interactive quizzes designed to make learning enjoyable and spark curiosity.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card h-100 text-center p-4">
+                    <i class="bi bi-graph-up display-4 text-primary mb-3"></i>
+                    <h3 class="h4">Track Your Progress</h3>
+                    <p>Monitor your learning journey with detailed statistics and performance metrics.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card h-100 text-center p-4">
+                    <i class="bi bi-trophy display-4 text-primary mb-3"></i>
+                    <h3 class="h4">Earn Achievements</h3>
+                    <p>Celebrate your learning journey with badges as you progress through engaging quizzes.</p>
                 </div>
             </div>
         </div>
     </div>
+</section>
+{% endblock %}
 
-    <div class="col-md-4">
-        <div class="card h-100">
-            <div class="card-body">
-                <h3>Leaderboard</h3>
-                <ol class="list-unstyled">
-                    {% for score in top_scores %}
-                        <li class="mb-2 d-flex justify-content-between">
-                            <span>{{ score.user.username }}</span>
-                            <span class="badge bg-primary">{{ score.total_score }}</span>
-                        </li>
-                    {% empty %}
-                        <li>No scores yet</li>
-                    {% endfor %}
-                </ol>
-            </div>
-        </div>
-    </div>
-</div>
-{% endblock content %}

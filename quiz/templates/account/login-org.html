@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="hero-section text-center" style="
+    background: linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8)), 
+    url("{% static 'images/episteme-statue.jpg' %}") no-repeat center center;
+    background-size: cover;
+    padding: 6rem 0;
+    margin-bottom: 2rem;
+">
+    <div class="hero-content">
+        <h1 class="display-4">Sign In</h1>
+        <p class="lead">Welcome back to Episteme</p>
+    </div>
+</div>
+
+<div class="row justify-content-center">
+    <div class="col-md-6 col-lg-4">
+        <div class="auth-container">
+            <h2 class="text-center mb-4">Login</h2>
+            <form method="post">
+                {% csrf_token %}
+                <div class="auth-input-group">
+                    {{ form.username.label_tag }}
+                    {{ form.username|add_class:"auth-input" }}
+                </div>
+                <div class="auth-input-group">
+                    {{ form.password.label_tag }}
+                    {{ form.password|add_class:"auth-input" }}
+                </div>
+                <button type="submit" class="btn btn-primary w-100">Login</button>
+            </form>
+            <div class="text-center mt-3">
+                <a href="{% url 'password_reset' %}">Forgot Password?</a>
+                <p class="mt-2">Don't have an account? <a href="{% url 'signup' %}">Sign up</a></p>
+            </div>
+        </div>
+    </div>
+    </div>
+{% endblock %}

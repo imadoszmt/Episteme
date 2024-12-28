@@ -17,9 +17,17 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from django.views.generic import TemplateView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    # Comment out the allauth URLs for now
+    # path('accounts/', include('allauth.urls')),
+    
+    # Add our temporary frontend routes
+    path('accounts/login/', TemplateView.as_view(template_name='account/login.html'), name='account_login'),
+    path('accounts/signup/', TemplateView.as_view(template_name='account/signup.html'), name='account_signup'),
+    
+    # Keep your quiz URLs
     path('', include('quiz.urls')),
-    path('accounts/', include('allauth.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

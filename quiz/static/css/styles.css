@@ -1,279 +1,362 @@
 :root {
-    --primary: #8A6534;
-    --primary-hover: #735425;
-    --secondary: #F6F5F1;
-    --accent: #EDE8E1;
-    --text-primary: #2D2D2D;
-    --text-secondary: #666666;
-    --success: #2E8B57;
-    --error: #DC3545;
-    --warning: #FFC107;
-    --info: #17A2B8;
-    --bg-primary: #FFFFFF;
-    --bg-secondary: #F8F7F4;
-    --border-color: #E6E1D9;
-}
-
-[data-theme="dark"] {
-    --bg-primary: #1F1F1F;
-    --bg-secondary: #2D2D2D;
-    --text-primary: #F6F5F1;
-    --text-secondary: #B3B3B3;
-    --border-color: #404040;
-    --accent: #3D3D3D;
-}
-
-/* Base Styles */
-body,html {
-    font-family: 'Inter', sans-serif;
+    /* Primary colors inspired by Anthropic's Claude */
+    --primary: #3D4043;         /* Slate gray */
+    --primary-hover: #2D2F31;   /* Darker slate */
+    --secondary: #F5F5F5;       /* Light gray background */
+    
+    /* Accent colors */
+    --accent-light: #E8E9EA;    /* Light gray */
+    --accent-dark: #2D2F31;     /* Dark slate */
+    
+    /* Text colors */
+    --text-primary: #2D2F31;    /* Dark slate */
+    --text-secondary: #6B6F76;  /* Medium gray */
+    
+    /* Background colors */
+    --bg-primary: #FFFFFF;      /* White */
+    --bg-secondary: #F9FAFB;    /* Light gray */
+    
+    /* Functional colors */
+    --success: #00C853;         /* Green */
+    --error: #FF3B3B;           /* Red */
+    --warning: #FFC107;         /* Yellow */
+    --info: #2196F3;            /* Blue */
+    
+    /* Border colors */
+    --border-color: #DFE1E6;
+  }
+  
+  [data-theme="dark"] {
+    --primary: #E8E9EA;         /* Light gray */
+    --primary-hover: #FFFFFF;   /* White */
+    --secondary: #2D2F31;       /* Dark slate */
+    
+    --text-primary: #FFFFFF;    /* White */
+    --text-secondary: #B0B0B0;  /* Light gray */
+    
+    --bg-primary: #1A1A1A;      /* Dark background */
+    --bg-secondary: #141414;    /* Darker background */
+    
+    --border-color: #2D2F31;    /* Dark border */
+  }
+  
+  /* Base Styles */
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     color: var(--text-primary);
     background-color: var(--bg-secondary);
-    line-height: 1.6;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-}
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  /* Typography */
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    margin-bottom: 1.2rem;
+  }
 
-/* Typography */
-h1, h2, h3, h4, h5, h6 {
+  h2 {
     font-weight: 600;
-    margin-bottom: 1rem;
 }
 
-/* Links */
-a {
+  h3 {
+    font-weight: 600;
+}
+  p {
+  line-height: 1.7; /* Increased for paragraphs */
+}
+  /* Links */
+  a {
     color: var(--primary);
     text-decoration: none;
     transition: color 0.2s ease;
-}
-
-a:hover {
+  }
+  
+  a:hover {
     color: var(--primary-hover);
-}
-
-/* Buttons */
-.btn-primary {
+  }
+  
+  /* Buttons */
+  .btn-primary {
     background-color: var(--primary);
     border-color: var(--primary);
-    color: #F6F5F1;
-    padding: 0.5rem 1.5rem;
-    border-radius: 0.375rem;
-    transition: all 0.2s ease;
-}
-
-.btn-primary:hover {
+    color: white;
+    font-weight: 500;
+    padding: 0.625rem 1.25rem;  /* Slightly more compact */
+    border-radius: 4px;         /* Less rounded corners */
+    box-shadow: none;           /* Remove shadow */
+  }
+  
+  .btn-primary:hover {
     background-color: var(--primary-hover);
     border-color: var(--primary-hover);
-}
-
-.btn-secondary {
-    background-color: var(--secondary);
-    border-color: var(--border-color);
-    color: var(--text-primary);
-}
-
-.btn-secondary:hover {
-    background-color: var(--accent);
-}
-
-/* Forms */
-.form-control {
-    border-color: var(--border-color);
-    border-radius: 0.375rem;
-    padding: 0.75rem 1rem;
-}
-
-.form-control:focus {
+    transform: none;            /* Remove transform effect */
+    box-shadow: none;           /* Remove shadow on hover */
+  }
+  
+  .btn-outline-primary {
+    color: var(--primary);
     border-color: var(--primary);
-    box-shadow: 0 0 0 0.2rem rgba(94, 68, 255, 0.25);
-}
+    background-color: transparent;
+    font-weight: 500;
+    padding: 0.625rem 1.25rem;
+    border-radius: 4px;
+  }
 
-/* Hero Section */
-.hero-section {
-    position: relative;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    color: var(--text-primary);
-    overflow: hidden;
-}
-
-.hero-section::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-image: url('/static/images/episteme-statue.jpg');
-    background-size: cover;
-    opacity: 0.1;
-    filter: sepia(20%) contrast(90%);
-    z-index: 0;
-}
-
-.hero-content {
-    position: relative;
-    z-index: 2;
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 2rem;
-}
-
-/* Cards */
-.card {
-    background: linear-gradient(
-        135deg,
-        rgba(255, 255, 255, 0.95),
-        rgba(246, 245, 241, 0.9)
-    );
-    border: 1px solid var(--border-color);
-    border-radius: 0.5rem;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-    height: 100%;
-    box-shadow: 0 2px 8px rgba(138, 101, 52, 0.05);
-}
-
-.card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-/* Navigation */
-.navbar {
-    background: rgba(255, 255, 255, 0.8);
-    backdrop-filter: blur(10px);
-}
-
-/* Dark Theme Overrides */
-[data-theme="dark"] .hero-section {
-    background: linear-gradient(
-        45deg,
-        rgba(31, 31, 31, 0.95),
-        rgba(45, 45, 45, 0.9)
-    );
-}
-
-[data-theme="dark"] .card {
-    background: linear-gradient(
-        135deg,
-        rgba(45, 45, 45, 0.95),
-        rgba(31, 31, 31, 0.9)
-    );
-}
-
-[data-theme="dark"] .navbar {
-    background: rgba(31, 31, 31, 0.8);
-}
-
-/* Quiz Elements */
-.question-card {
-    padding: 2rem;
-    margin-bottom: 1.5rem;
-}
-
-.option-item {
-    padding: 1rem;
-    margin: 0.5rem 0;
-    border: 1px solid var(--border-color);
-    border-radius: 0.375rem;
-    cursor: pointer;
+  .btn-outline-primary:hover {
+    background-color: var(--accent-light);
+    color: var(--primary);
+    border-color: var(--primary);
+    transform: none;            /* Remove transform effect */
+  }
+  /* Cards */
+  .card {
+    background-color: var(--bg-primary);
+    border: none;  /* Remove border */
+    border-radius: 12px;  /* Increased border radius */
     transition: all 0.2s ease;
-}
-
-.option-item:hover {
-    background-color: var(--accent);
-}
-
-.option-item.selected {
-    background-color: var(--primary);
-    color: white;
-    border-color: var(--primary);
-}
-
-/* Progress Bar */
-.progress {
-    height: 0.5rem;
-    background-color: var(--secondary);
-    border-radius: 1rem;
-}
-
-.progress-bar {
-    background-color: var(--primary);
-}
-
-/* Footer */
-.footer {
-    background: var(--bg-secondary);
-    flex-shrink: 0;
-    margin-top: auto;
-}
-
-/* Authentication */
-.auth-container {
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  }
+  
+  .card:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);  /* Subtle lift effect */
+  }
+  
+  /* Course/Quiz Cards */
+  .course-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 2rem;  /* Increased padding */
     background: var(--bg-primary);
-    border-radius: 12px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-    padding: 2rem;
-    margin: 2rem auto;
-}
-
-.auth-input-group {
+  }
+  
+  .course-badge {
+    align-self: flex-start;
+    background-color: var(--accent-light);
+    color: var(--primary);
+    font-size: 0.8125rem;  /* 13px */
+    font-weight: 600;
+    padding: 0.375rem 0.75rem;
+    border-radius: 100px;  /* Pill shape */
+    margin-bottom: 1.25rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  
+  .course-title {
+    font-size: 1.375rem;  /* 22px */
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+    color: var(--text-primary);
+  }
+  
+  .course-description {
+    color: var(--text-secondary);
+    font-size: 1rem;
+    line-height: 1.6;
     margin-bottom: 1.5rem;
-}
-
-.auth-input {
+    flex-grow: 1;
+  }
+  
+  .course-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.875rem;
+  }
+  
+  .meta-item {
+    display: flex;
+    align-items: center;
+  }
+  
+  .meta-item i {
+    margin-right: 0.5rem;
+  }
+  
+  /* Hero Section (Claude AI inspired) */
+  .hero-section {
+    background-color: var(--bg-primary);
+    padding: 8rem 0;
+    text-align: center;
+  }
+  
+  .hero-title {
+    font-size: 3rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+    background: none;           /* Remove gradient */
+    -webkit-background-clip: unset;
+    background-clip: unset;
+    -webkit-text-fill-color: var(--text-primary);
+    color: var(--text-primary);
+  }
+  
+  .hero-subtitle {
+    font-size: 1.25rem;
+    color: var(--text-secondary);
+    max-width: 700px;
+    margin: 0 auto 3rem;
+  }
+  
+  /* Auth Forms (Clean, minimalist style) */
+  .auth-container {
+    background-color: var(--bg-primary);
+    border-radius: 8px;
+    padding: 2rem;
+    max-width: 400px;
+    margin: 2rem auto;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  }
+  
+  .auth-input {
     width: 100%;
     padding: 0.75rem 1rem;
     border: 1px solid var(--border-color);
-    border-radius: 8px;
-    font-size: 1rem;
-    transition: all 0.2s ease;
-    background: var(--bg-primary);
-    color: var(--text-primary);
-}
-
-.auth-input:focus {
+    border-radius: 4px;
+    margin-bottom: 1rem;
+    transition: border-color 0.3s ease;
+  }
+  
+  .auth-input:focus {
     border-color: var(--primary);
-    box-shadow: 0 0 0 0.2rem rgba(138, 101, 52, 0.25);
     outline: none;
-}
-
-/* Dark theme overrides for auth pages */
-[data-theme="dark"] .auth-container {
-    background: var(--bg-secondary);
-}
-
-[data-theme="dark"] .auth-input {
-    background: var(--bg-secondary);
-    border-color: var(--border-color);
-}
-
-[data-theme="dark"] .hero-section {
-    background: linear-gradient(
-        45deg,
-        rgba(31, 31, 31, 0.95),
-        rgba(45, 45, 45, 0.9)
-    );
-}
-
-/* Form error messages */
-.errorlist {
-    color: var(--error);
-    list-style: none;
-    padding: 0;
-    margin: 0.5rem 0;
-    font-size: 0.875rem;
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-    .container {
-        padding-left: 1rem;
-        padding-right: 1rem;
+  }
+  
+  /* Navbar */
+  .navbar {
+    background-color: var(--bg-primary);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 1rem 0; /* Added padding */
+  }
+  
+  .navbar-brand {
+    font-weight: 700;
+    color: var(--primary);
+    font-size: 1.4rem; /* Increased font size */
+  }
+  
+  .nav-link {
+    font-weight: 500;
+    color: var(--text-secondary);
+    transition: color 0.2s ease;
+    font-size: 1.1rem;
+  }
+  
+  .nav-link:hover {
+    color: var(--primary);
+  }
+  
+  /* Theme Toggle */
+  .theme-toggle {
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    font-size: 1.25rem;
+    cursor: pointer;
+    transition: color 0.2s ease;
+  }
+  
+  .theme-toggle:hover {
+    color: var(--primary);
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .hero-title {
+      font-size: 2.5rem;
     }
     
-    .question-card {
-        padding: 1.5rem;
+    .hero-subtitle {
+      font-size: 1rem;
     }
-}
+  }
+  
+  /* Section styling */
+  section {
+    padding: 4rem 0;
+  }
+  
+  section.bg-secondary {
+    background-color: var(--bg-secondary) !important;  /* Override Bootstrap */
+  }
+  
+  /* Grid layout adjustments */
+  .row {
+    margin: -1rem;  /* Negative margin for consistent spacing */
+  }
+  
+  .col-md-4 {
+    padding: 1rem;  /* Consistent padding */
+  }
+  
+  /* Why Choose Section Cards */
+  .card.h-100.text-center {
+    padding: 2.5rem 2rem;
+    background: var(--bg-primary);
+  }
+  
+  .card.h-100.text-center i {
+    color: var(--primary);
+    margin-bottom: 1.5rem;
+  }
+  
+  .card.h-100.text-center h3 {
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+  }
+  
+  .card.h-100.text-center p {
+    color: var(--text-secondary);
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+  
+  /* Auth Pages */
+  .auth-page {
+    background-color: var(--bg-secondary);
+    min-height: calc(100vh - 150px); /* Account for navbar and footer */
+  }
+  
+  .auth-container {
+    background-color: var(--bg-primary);
+    border-radius: 8px;
+    padding: 2.5rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+  
+  .auth-form .form-label {
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+  }
+  
+  .auth-form .auth-input {
+    background-color: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    padding: 0.75rem 1rem;
+    border-radius: 4px;
+    width: 100%;
+  }
+  
+  .auth-form .auth-input:focus {
+    border-color: var(--primary);
+    box-shadow: none;
+    outline: none;
+  }
+  
+  .auth-form .text-primary {
+    color: var(--primary) !important;
+  }
+  
+  .auth-form .alert {
+    border-radius: 4px;
+    font-size: 0.875rem;
+  }
+  
+  

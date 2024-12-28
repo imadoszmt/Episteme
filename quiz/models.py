@@ -2,8 +2,18 @@ from django.db import models
 from django.contrib.auth.models import User
 
 class Quiz(models.Model):
+    LEVEL_CHOICES = [
+        ('beginner', 'Beginner'),
+        ('intermediate', 'Intermediate'),
+        ('advanced', 'Advanced'),
+    ]
+
     title = models.CharField(max_length=200)
     description = models.TextField()
+    level = models.CharField(max_length=20, choices=LEVEL_CHOICES, default='beginner')
+    duration = models.CharField(max_length=50, default='1 hour')  # e.g., "1 hour", "30 mins"
+    is_free = models.BooleanField(default=True)
+    is_friendly = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     

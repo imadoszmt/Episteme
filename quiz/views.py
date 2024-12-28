@@ -57,3 +57,7 @@ def quiz_results(request, quiz_id):
         'user_answers': user_answers
     }
     return render(request, 'results.html', context)
+
+def quiz_list(request):
+    quizzes = Quiz.objects.all().order_by('-created_at')
+    return render(request, 'quiz/quiz_list.html', {'quizzes': quizzes})
