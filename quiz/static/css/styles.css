@@ -9,12 +9,18 @@
     --accent-dark: #2D2F31;     /* Dark slate */
     
     /* Text colors */
-    --text-primary: #2D2F31;    /* Dark slate */
+    --text-primary: #2D2D2D;    /* Dark slate */
     --text-secondary: #6B6F76;  /* Medium gray */
     
     /* Background colors */
     --bg-primary: #EAEAEA;      /* Softer light gray for light mode */
     --bg-secondary: #F9FAFB;    /* Light gray */
+    
+    /* Button colors */
+    --button-bg: transparent;    /* Transparent background for buttons */
+    --button-border: #8A6534;    /* Brown border color */
+    --button-hover-bg: #8A6534;  /* Brown color on hover */
+    --button-hover-border: #735425; /* Darker brown on hover */
     
     /* Functional colors */
     --success: #00C853;         /* Green */
@@ -24,7 +30,11 @@
     
     /* Border colors */
     --border-color: #DFE1E6;
-  }
+    
+    /* Card colors */
+    --card-bg: #FFFFFF;         /* White background for cards */
+    --card-border: #DFE1E6;     /* Light gray border for cards */
+}
   
   [data-theme="dark"] {
     /* Dark mode colors */
@@ -43,6 +53,12 @@
     
     /* Card background */
     --card-bg: #2B2B2B;         /* Darker gray for cards */
+    
+    /* Hero section button */
+    --hero-button-bg: #2B2B2B;  /* Darker button background */
+    
+    /* Card colors */
+    --card-border: rgba(255, 255, 255, 0.1); /* Faded white border for dark mode */
   }
   
   /* Base Styles */
@@ -85,20 +101,20 @@
   
   /* Buttons */
   .btn-primary {
-    background-color: var(--primary);
-    border-color: var(--primary);
-    color: white;
+    background-color: var(--button-bg); /* Transparent background */
+    border: 2px solid var(--button-border); /* Brown border color */
+    color: var(--button-border); /* Text color */
     font-weight: 500;
-    padding: 0.625rem 1.25rem;  /* Slightly more compact */
-    border-radius: 4px;         /* Less rounded corners */
-    box-shadow: none;           /* Remove shadow */
+    padding: 0.625rem 1.25rem; /* Slightly more compact */
+    border-radius: 4px; /* Less rounded corners */
+    transition: background-color 0.3s ease, border-color 0.3s ease; /* Smooth transition */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4); /* Add a subtle shadow for depth */
   }
   
   .btn-primary:hover {
-    background-color: var(--primary-hover);
-    border-color: var(--primary-hover);
-    transform: none;            /* Remove transform effect */
-    box-shadow: none;           /* Remove shadow on hover */
+    background-color: var(--button-hover-bg); /* Brown color on hover */
+    border-color: var(--button-hover-border); /* Darker brown on hover */
+    color: white; /* Change text color to white on hover */
   }
   
   .btn-outline-primary {
@@ -108,6 +124,7 @@
     font-weight: 500;
     padding: 0.625rem 1.25rem;
     border-radius: 4px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4); /* Add a subtle shadow for depth */
   }
 
   .btn-outline-primary:hover {
@@ -120,11 +137,12 @@
   .card {
     background-color: var(--card-bg);
     color: var(--text-primary); /* Ensure text is visible */
-    border: 1px solid var(--border-color);
+    border: 1px solid var(--card-border); /* Use the border color variable */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
     border-radius: 12px;  /* Increased border radius */
     transition: all 0.2s ease;
     overflow: hidden;
+    transition: border-color 0.3s ease; /* Smooth transition for border color */
   }
   
   .card:hover {
@@ -370,6 +388,28 @@
   .footer {
     background-color: var(--footer-bg);
     padding: 1rem 0;
+  }
+  
+  /* Hero Button */
+  .hero-section .btn {
+    background-color: var(--hero-button-bg); /* Darker button background */
+    color: var(--text-primary); /* Ensure text is visible */
+    border: none; /* Remove border */
+    transition: background-color 0.3s ease; /* Smooth transition */
+  }
+  
+  .hero-section .btn:hover {
+    background-color: var(--primary-hover); /* Lighter on hover */
+  }
+  
+  /* Specific styles for card titles */
+  .card h3 {
+    color: var(--text-primary); /* Ensure card titles are visible */
+  }
+  
+  /* Specific styles for card descriptions */
+  .card p {
+    color: var(--text-secondary); /* Ensure descriptions are readable */
   }
   
   
