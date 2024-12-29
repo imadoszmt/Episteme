@@ -13,8 +13,8 @@
     --text-secondary: #6B6F76;  /* Medium gray */
     
     /* Background colors */
-    --bg-primary: #ffffffc9;      /* White */
-    --bg-secondary: #f9fafb42;    /* Light gray */
+    --bg-primary: #FFFFFF;      /* White */
+    --bg-secondary: #F9FAFB;    /* Light gray */
     
     /* Functional colors */
     --success: #00C853;         /* Green */
@@ -315,48 +315,6 @@
     color: var(--text-secondary);
     font-size: 1rem;
     line-height: 1.6;
-  }
-  
-  /* Auth Pages */
-  .auth-page {
-    background-color: var(--bg-secondary);
-    min-height: calc(100vh - 150px); /* Account for navbar and footer */
-  }
-  
-  .auth-container {
-    background-color: var(--bg-primary);
-    border-radius: 8px;
-    padding: 2.5rem;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  }
-  
-  .auth-form .form-label {
-    color: var(--text-primary);
-    margin-bottom: 0.5rem;
-  }
-  
-  .auth-form .auth-input {
-    background-color: var(--bg-primary);
-    border: 1px solid var(--border-color);
-    color: var(--text-primary);
-    padding: 0.75rem 1rem;
-    border-radius: 4px;
-    width: 100%;
-  }
-  
-  .auth-form .auth-input:focus {
-    border-color: var(--primary);
-    box-shadow: none;
-    outline: none;
-  }
-  
-  .auth-form .text-primary {
-    color: var(--primary) !important;
-  }
-  
-  .auth-form .alert {
-    border-radius: 4px;
-    font-size: 0.875rem;
   }
   
   
