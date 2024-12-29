@@ -1,5 +1,5 @@
 :root {
-    /* Primary colors inspired by Anthropic's Claude */
+    /* Light mode colors */
     --primary: #3D4043;         /* Slate gray */
     --primary-hover: #2D2F31;   /* Darker slate */
     --secondary: #F5F5F5;       /* Light gray background */
@@ -27,17 +27,22 @@
   }
   
   [data-theme="dark"] {
+    /* Dark mode colors */
     --primary: #E8E9EA;         /* Light gray */
     --primary-hover: #CCCCCC;   /* Lighter gray hover */
-    --secondary: #2D2F31;       /* Dark slate */
     
-    --text-primary: #E8E9EA;    /* Light gray text */
+    --text-primary: #FFFFFF;    /* White text for better contrast */
     --text-secondary: #B0B0B0;  /* Medium gray text */
     
-    --bg-primary: #2A2A2A;      /* Darker gray for dark mode */
-    --bg-secondary: #141414;     /* Darker background */
+    --bg-primary: #1A1A1A;      /* Darker gray for dark mode */
+    --bg-secondary: #2A2A2A;     /* Darker background for cards */
     
-    --border-color: #2D2F31;    /* Dark border */
+    /* Navbar and footer */
+    --navbar-bg: #1A1A1A;       /* Dark gray for navbar */
+    --footer-bg: #1A1A1A;       /* Darker gray for footer */
+    
+    /* Card background */
+    --card-bg: #2B2B2B;         /* Darker gray for cards */
   }
   
   /* Base Styles */
@@ -113,12 +118,13 @@
   }
   /* Cards */
   .card {
-    background-color: var(--bg-primary);
-    border: none;  /* Remove border */
+    background-color: var(--card-bg);
+    color: var(--text-primary); /* Ensure text is visible */
+    border: 1px solid var(--border-color);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
     border-radius: 12px;  /* Increased border radius */
     transition: all 0.2s ease;
     overflow: hidden;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
   }
   
   .card:hover {
@@ -230,8 +236,8 @@
   
   /* Navbar */
   .navbar {
-    background-color: var(--bg-primary);
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    background-color: var(--navbar-bg);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
     padding: 1rem 0; /* Added padding */
   }
   
@@ -279,6 +285,7 @@
   
   /* Section styling */
   section {
+    background-color: var(--bg-secondary);
     padding: 4rem 0;
   }
   
@@ -357,6 +364,12 @@
   .auth-form .alert {
     border-radius: 4px;
     font-size: 0.875rem;
+  }
+  
+  /* Footer */
+  .footer {
+    background-color: var(--footer-bg);
+    padding: 1rem 0;
   }
   
   
