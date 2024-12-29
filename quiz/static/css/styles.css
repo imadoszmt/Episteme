@@ -13,8 +13,8 @@
     --text-secondary: #6B6F76;  /* Medium gray */
     
     /* Background colors */
-    --bg-primary: #ffffffc9;      /* White */
-    --bg-secondary: #f9fafb42;    /* Light gray */
+    --bg-primary: #EAEAEA;      /* Softer light gray for light mode */
+    --bg-secondary: #F9FAFB;    /* Light gray */
     
     /* Functional colors */
     --success: #00C853;         /* Green */
@@ -28,14 +28,14 @@
   
   [data-theme="dark"] {
     --primary: #E8E9EA;         /* Light gray */
-    --primary-hover: #FFFFFF;   /* White */
+    --primary-hover: #CCCCCC;   /* Lighter gray hover */
     --secondary: #2D2F31;       /* Dark slate */
     
-    --text-primary: #FFFFFF;    /* White */
-    --text-secondary: #B0B0B0;  /* Light gray */
+    --text-primary: #E8E9EA;    /* Light gray text */
+    --text-secondary: #B0B0B0;  /* Medium gray text */
     
-    --bg-primary: #1A1A1A;      /* Dark background */
-    --bg-secondary: #141414;    /* Darker background */
+    --bg-primary: #2A2A2A;      /* Darker gray for dark mode */
+    --bg-secondary: #141414;     /* Darker background */
     
     --border-color: #2D2F31;    /* Dark border */
   }
@@ -44,7 +44,7 @@
   body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     color: var(--text-primary);
-    background-color: var(--bg-secondary);
+    background-color: var(--bg-primary);
     line-height: 1.7;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
