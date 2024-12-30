@@ -6,3 +6,7 @@ venv
 
 # windsurf rules
 .windsurfrules
+
+# quiz
+Documentation/
+*.md
