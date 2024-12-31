@@ -237,6 +237,7 @@
   }
   
   .auth-input {
+    background-color: #f8f9fa !important; /* Lighter background color for better visibility */
     border: 1px solid #ced4da; /* Light border */
     border-radius: 5px; /* Rounded corners */
     transition: border-color 0.3s; /* Smooth transition */
