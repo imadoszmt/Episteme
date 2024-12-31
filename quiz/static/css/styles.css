@@ -230,26 +230,25 @@
   
   /* Auth Forms (Clean, minimalist style) */
   .auth-container {
-    background-color: var(--bg-primary);
-    border-radius: 8px;
-    padding: 2rem;
-    max-width: 400px;
-    margin: 2rem auto;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    background-color: rgba(255, 255, 255, 0.9); /* Slightly opaque white for contrast */
+    border-radius: 8px; /* Rounded corners */
+    padding: 2rem; /* Padding inside the container */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
   }
   
   .auth-input {
-    width: 100%;
-    padding: 0.75rem 1rem;
-    border: 1px solid var(--border-color);
-    border-radius: 4px;
-    margin-bottom: 1rem;
-    transition: border-color 0.3s ease;
+    border: 1px solid #ced4da; /* Light border */
+    border-radius: 5px; /* Rounded corners */
+    transition: border-color 0.3s; /* Smooth transition */
   }
   
   .auth-input:focus {
-    border-color: var(--primary);
-    outline: none;
+    border-color: #007bff; /* Change border color on focus */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Add shadow on focus */
+  }
+  
+  .form-group {
+    margin-bottom: 1rem; /* Reduced spacing between input fields */
   }
   
   /* Navbar */
@@ -349,10 +348,10 @@
   }
   
   .auth-container {
-    background-color: var(--bg-primary);
+    background-color: var(--bg-primary) !important;
     border-radius: 8px;
     padding: 2.5rem;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.493);
   }
   
   .auth-form .form-label {
@@ -376,6 +375,7 @@
   }
   
   .auth-form .text-primary {
+    --primary: #8a6534;
     color: var(--primary) !important;
   }
   
@@ -412,4 +412,25 @@
     color: var(--text-secondary); /* Ensure descriptions are readable */
   }
   
+  /* Background for Featured Quizzes Section */
+  .featured-quizzes {
+    background-image: url('../images/key-figures-in-epistemology-1.jpg'); /* Adjust the path as necessary */
+    background-size: cover; /* Cover the entire area */
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat; /* Prevent repeating */
+    padding: 2rem; /* Add padding */
+    border-radius: 8px; /* Rounded corners */
+    color: white; /* Text color for contrast */
+  }
+  
+  /* Background for Auth Pages */
+  .auth-page {
+    background-image: url('../images/key-figures-in-epistemology-1.jpg'); /* Adjust the path as necessary */
+    background-size: cover; /* Cover the entire area */
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat; /* Prevent repeating */
+    padding: 5rem 0; /* Add padding */
+    color: rgba(44, 43, 43, 0.726); /* Text color for contrast */
+  }
+    
   
