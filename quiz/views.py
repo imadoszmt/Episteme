@@ -5,6 +5,7 @@ from django.urls import reverse_lazy
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import logout, login, authenticate
+import re
 
 def home(request):
     return render(request, 'home.html')
@@ -82,6 +83,33 @@ def signup(request):
         email = request.POST.get('email')
         password1 = request.POST.get('password1')
         password2 = request.POST.get('password2')
+
+        # Validate email format
+        if not re.match(r"[^@]+@[^@]+\.[^@]+", email):
+            messages.error(request, 'Invalid email format.')
+            return render(request, 'account/signup.html')
+
+        # Validate username uniqueness
+        if User.objects.filter(username=username).exists():
+            messages.error(request, 'Username already exists.')
+            return render(request, 'account/signup.html')
+
+        # Validate password complexity
+        if len(password1) < 8:  # Check for minimum length
+            messages.error(request, 'Password must be at least 8 characters long.')
+            return render(request, 'account/signup.html')
+
+        if not re.search(r"[A-Za-z]", password1):  # Check for letters
+            messages.error(request, 'Password must contain at least one letter.')
+            return render(request, 'account/signup.html')
+
+        if not re.search(r"\d", password1):  # Check for numbers
+            messages.error(request, 'Password must contain at least one number.')
+            return render(request, 'account/signup.html')
+
+        if password1.isdigit():  # Check if password is purely numeric
+            messages.error(request, 'Password cannot be entirely numeric.')
+            return render(request, 'account/signup.html')
 
         # Check if passwords match
         if password1 == password2:

@@ -143,11 +143,13 @@
     transition: all 0.2s ease;
     overflow: hidden;
     transition: border-color 0.3s ease; /* Smooth transition for border color */
+    transition: transform 0.2s;
   }
   
   .card:hover {
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
     transform: translateY(-2px);  /* Subtle lift effect */
+    transform: scale(1.05);
   }
   
   /* Course/Quiz Cards */
@@ -433,6 +435,10 @@
     background-repeat: no-repeat; /* Prevent repeating */
     padding: 5rem 0; /* Add padding */
     color: rgba(44, 43, 43, 0.726); /* Text color for contrast */
+  }
+  
+  .badge {
+    margin-right: 5px;
   }
     
   
