@@ -1,9 +1,18 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from .models import Quiz, Question, UserAnswer
+from django.urls import reverse_lazy
+from django.contrib.auth.models import User
+from django.contrib import messages
+from django.contrib.auth import logout, login, authenticate
 
 def home(request):
     return render(request, 'home.html')
+
+def logout_view(request):
+    logout(request)
+    messages.success(request, 'You have been logged out successfully.')
+    return redirect('home')  # Redirect to home after logout
 
 @login_required
 def quiz_detail(request, quiz_id):
@@ -61,3 +70,42 @@ def quiz_results(request, quiz_id):
 def quiz_list(request):
     quizzes = Quiz.objects.all().order_by('-created_at')
     return render(request, 'quiz/quiz_list.html', {'quizzes': quizzes})
+
+@login_required
+def account_profile(request):
+    quiz_attempts = UserAnswer.objects.filter(user=request.user)  # Assuming UserAnswer tracks quiz attempts
+    return render(request, 'account/profile.html', {'quiz_attempts': quiz_attempts})
+
+def signup(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        email = request.POST.get('email')
+        password1 = request.POST.get('password1')
+        password2 = request.POST.get('password2')
+
+        # Check if passwords match
+        if password1 == password2:
+            try:
+                user = User.objects.create_user(username=username, email=email, password=password1)
+                user.save()
+                login(request, user)  # Log the user in after registration
+                messages.success(request, 'Account created successfully! Redirecting to your profile...')
+                return redirect('account_profile')  # Redirect to the profile page
+            except Exception as e:
+                messages.error(request, f'Error creating account: {e}')
+        else:
+            messages.error(request, 'Passwords do not match.')
+    return render(request, 'account/signup.html')
+
+def login_view(request):
+    if request.method == 'POST':
+        login_param = request.POST.get('login')  # This can be username or email
+        password = request.POST.get('password')
+        user = authenticate(request, username=login_param, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('account_profile')  # Redirect to profile after login
+        else:
+            messages.error(request, 'Invalid username or password.')
+    return render(request, 'account/login.html')
+

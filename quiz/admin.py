@@ -7,9 +7,9 @@ class OptionInline(admin.TabularInline):
 
 class QuestionAdmin(admin.ModelAdmin):
     inlines = [OptionInline]
-    list_display = ('quiz', 'text', 'created_at')
+    list_display = ('quiz', 'question_text', 'created_at')
     list_filter = ('quiz', 'created_at')
-    search_fields = ('text', 'quiz__title')
+    search_fields = ('question_text', 'quiz__title')
 
 class QuizAdmin(admin.ModelAdmin):
     list_display = ('title', 'created_at', 'updated_at')

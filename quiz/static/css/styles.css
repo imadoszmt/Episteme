@@ -48,14 +48,14 @@
     --bg-secondary: #2A2A2A;     /* Darker background for cards */
     
     /* Navbar and footer */
-    --navbar-bg: #1A1A1A;       /* Dark gray for navbar */
-    --footer-bg: #1A1A1A;       /* Darker gray for footer */
+    --navbar-bg: #1a1a1af1;       /* Dark gray for navbar */
+    --footer-bg: #1a1a1af1;       /* Darker gray for footer */
     
     /* Card background */
     --card-bg: #2B2B2B;         /* Darker gray for cards */
     
     /* Hero section button */
-    --hero-button-bg: #2B2B2B;  /* Darker button background */
+    --hero-button-bg: #3b3939;  /* Darker button background */
     
     /* Card colors */
     --card-border: rgba(255, 255, 255, 0.1); /* Faded white border for dark mode */
@@ -254,8 +254,8 @@
   
   /* Navbar */
   .navbar {
-    background-color: var(--navbar-bg);
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    background-color: var(--navbar-bg) !important;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.678);
     padding: 1rem 0; /* Added padding */
   }
   
@@ -387,7 +387,8 @@
   
   /* Footer */
   .footer {
-    background-color: var(--footer-bg);
+    background-color: var(--footer-bg) !important;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.205);
     padding: 1rem 0;
   }
   

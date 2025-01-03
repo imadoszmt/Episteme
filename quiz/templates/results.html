@@ -28,7 +28,7 @@
             {% for answer in user_answers %}
             <div class="mb-4 p-3 border rounded {% if answer.is_correct %}bg-success-subtle{% else %}bg-danger-subtle{% endif %}">
                 <h4 class="mb-3">Question {{ forloop.counter }}</h4>
-                <p class="mb-3">{{ answer.question.text }}</p>
+                <p class="mb-3">{{ answer.question.question_text }}</p>
                 
                 <div class="mb-3">
                     <strong>Your Answer:</strong> 

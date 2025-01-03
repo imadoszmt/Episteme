@@ -21,12 +21,12 @@ from django.views.generic import TemplateView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    # Comment out the allauth URLs for now
-    # path('accounts/', include('allauth.urls')),
+    # Uncomment the allauth URLs
+    path('accounts/', include('allauth.urls')),
     
     # Add our temporary frontend routes
-    path('accounts/login/', TemplateView.as_view(template_name='account/login.html'), name='account_login'),
-    path('accounts/signup/', TemplateView.as_view(template_name='account/signup.html'), name='account_signup'),
+    #path('accounts/login/', TemplateView.as_view(template_name='account/login.html'), name='socialaccount_login'),
+    #path('accounts/signup/', TemplateView.as_view(template_name='account/signup.html'), name='account_signup'),
     
     # Keep your quiz URLs
     path('', include('quiz.urls')),
