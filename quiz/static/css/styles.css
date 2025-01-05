@@ -138,8 +138,8 @@
     background-color: var(--card-bg);
     color: var(--text-primary); /* Ensure text is visible */
     border: 1px solid var(--card-border); /* Use the border color variable */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
-    border-radius: 12px;  /* Increased border radius */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.664);
+    border-radius: 10px;
     transition: all 0.2s ease;
     overflow: hidden;
     transition: border-color 0.3s ease; /* Smooth transition for border color */
@@ -152,7 +152,7 @@
     transform: scale(1.05);
   }
   
-  /* Course/Quiz Cards */
+  /*Quiz Cards */
   .course-card {
     display: flex;
     flex-direction: column;
@@ -439,6 +439,14 @@
   
   .badge {
     margin-right: 5px;
+  }
+  
+  .card-title {
+    font-weight: bold;
+  }
+  
+  .badge {
+    font-size: 0.9rem;
   }
     
   

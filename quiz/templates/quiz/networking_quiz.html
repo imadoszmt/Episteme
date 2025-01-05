@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Networking Basics Quiz | Episteme{% endblock %}
+
+{% block extra_css %}
+<link href="{% static 'css/quiz.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<header class="header">
+    <div class="logo">
+        <h1>Networking Basics</h1>
+    </div>
+    <div class="utility-icons">
+        <span class="icon" title="Share Episteme with a friend">
+            <i class="palm-tree"></i>
+        </span>
+        <span class="icon">
+            <i class="question-mark"></i>
+        </span>
+        <span class="icon">
+            <i class="hamburger"></i>
+        </span>
+        <span class="icon">
+            <i class="three-dots"></i>
+        </span>
+    </div>
+</header>
+
+<div class="quiz-container">
+    <div id="question-container" class="question-card">
+        <h2 id="question-text" class="question-text">{{ questions.0.text }}</h2>
+        <ul id="options-list" class="list-group">
+            {% for option in questions.0.options %}
+            <li class="list-group-item answer-option">{{ option }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    
+    <div class="quiz-navigation">
+        <button id="back-button" class="nav-button btn btn-secondary" disabled>Back</button>
+        <div id="progress" class="progress-indicator">1 of {{ totalQuestions }}</div>
+        <button id="next-button" class="nav-button btn btn-primary">Next</button>
+    </div>
+    <div id="result-message" class="result-message mt-3"></div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    const questionsQuiz = {{ questions|safe }};
+    const totalQuestions = questionsQuiz.length;
+</script>
+<script src="{% static 'js/quiz.js' %}"></script>
+{% endblock %}
