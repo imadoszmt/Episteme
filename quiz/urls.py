@@ -10,6 +10,11 @@ from .views import (
     logout_view,
     home,
     networking_quiz,
+    web_programming_quiz,
+    database_quiz,
+    python_quiz,
+    javascript_quiz,
+    c_programming_quiz,
 )
 
 app_name = 'quiz'
@@ -25,4 +30,9 @@ urlpatterns = [
     path('quiz/<int:quiz_id>/question/<int:question_id>/', quiz_question, name='quiz_question'),
     path('quiz/<int:quiz_id>/results/', quiz_results, name='quiz_results'),
     path('quizzes/networking/', networking_quiz, name='networking_quiz'),
+    path('quizzes/webprogramming/', web_programming_quiz, name='web_programming_quiz'),
+    path('quizzes/database/', database_quiz, name='database_quiz'),
+    path('quizzes/python/', python_quiz, name='python_quiz'),
+    path('quizzes/javascript/', javascript_quiz, name='javascript_quiz'),
+    path('quizzes/cprogramming/', c_programming_quiz, name='c_programming_quiz'),
 ] 

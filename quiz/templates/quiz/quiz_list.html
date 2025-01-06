@@ -17,9 +17,9 @@
     }
 
     .quiz-card {
-        background: #ffffff;
+        background: #ffffff00;
         border-radius: 12px;
-        box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+        box-shadow: 0 2px 15px rgba(0, 0, 0, 0.349);
         transition: transform 0.2s ease, box-shadow 0.2s ease;
         border: none;
         height: 100%;
@@ -117,7 +117,7 @@
         <!-- Networking Basics Quiz Card -->
         <div class="quiz-card card">
             <div class="card-body d-flex flex-column">
-                <h5 class="card-title">Networking Basics Quiz</h5>
+                <h5 class="card-title">Networking Basics </h5>
                 <p class="card-text flex-grow-1">Dive into the fundamentals of networking and test your knowledge with this engaging quiz.</p>
                 <div class="d-flex justify-content-between align-items-center">
                     <div class="badges">
@@ -125,6 +125,81 @@
                         <span class="badge time-badge">30 min</span>
                     </div>
                     <a href="{% url 'quiz:networking_quiz' %}" class="btn start-quiz-btn">Start Quiz</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Web Programming Basics Card -->
+        <div class="quiz-card card">
+            <div class="card-body d-flex flex-column">
+                <h5 class="card-title">Web Programming Basics</h5>
+                <p class="card-text flex-grow-1">Explore the essential concepts of web development, including HTML, CSS, and JavaScript, and test your knowledge with this engaging quiz.</p>
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="badges">
+                        <span class="badge level-badge">Beginner Friendly</span>
+                        <span class="badge time-badge">30 min</span>
+                    </div>
+                    <a href="{% url 'quiz:web_programming_quiz' %}" class="btn start-quiz-btn">Start Quiz</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Database Basics Card -->
+        <div class="quiz-card card">
+            <div class="card-body d-flex flex-column">
+                <h5 class="card-title">Database Basics</h5>
+                <p class="card-text flex-grow-1">Explore the fundamental concepts of databases, including relational models, SQL commands, and data integrity, and test your knowledge with this engaging quiz.</p>
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="badges">
+                        <span class="badge level-badge">Beginner Friendly</span>
+                        <span class="badge time-badge">30 min</span>
+                    </div>
+                    <a href="{% url 'quiz:database_quiz' %}" class="btn start-quiz-btn">Start Quiz</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Python Basics Card -->
+        <div class="quiz-card card">
+            <div class="card-body d-flex flex-column">
+                <h5 class="card-title">Python Basics</h5>
+                <p class="card-text flex-grow-1">Dive into the essential concepts of Python programming, including data types, control structures, functions, and object-oriented programming, and test your knowledge with this engaging quiz.</p>
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="badges">
+                        <span class="badge level-badge">Beginner Friendly</span>
+                        <span class="badge time-badge">30 min</span>
+                    </div>
+                    <a href="{% url 'quiz:python_quiz' %}" class="btn start-quiz-btn">Start Quiz</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- JavaScript Basics Card -->
+        <div class="quiz-card card">
+            <div class="card-body d-flex flex-column">
+                <h5 class="card-title">JavaScript Basics</h5>
+                <p class="card-text flex-grow-1">Explore the fundamental concepts of JavaScript programming, including syntax, data types, functions, and event handling, and test your knowledge with this engaging quiz.</p>
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="badges">
+                        <span class="badge level-badge">Beginner Friendly</span>
+                        <span class="badge time-badge">30 min</span>
+                    </div>
+                    <a href="{% url 'quiz:javascript_quiz' %}" class="btn start-quiz-btn">Start Quiz</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- C programming Basics Card -->
+        <div class="quiz-card card">
+            <div class="card-body d-flex flex-column">
+                <h5 class="card-title">C Programming Basics</h5>
+                <p class="card-text flex-grow-1">Dive into the essential concepts of C programming, including data types, control structures, functions, and memory management, and test your knowledge with this engaging quiz.</p>
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="badges">
+                        <span class="badge level-badge">Beginner Friendly</span>
+                        <span class="badge time-badge">30 min</span>
+                    </div>
+                    <a href="{% url 'quiz:c_programming_quiz' %}" class="btn start-quiz-btn">Start Quiz</a>
                 </div>
             </div>
         </div>
