@@ -1,9 +1,11 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
-from .models import Quiz, Question, UserAnswer
+from .models import Quiz, Question, UserAnswer, Option, QuizAttempt
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import logout, login, authenticate
+from django.db.models import Prefetch
+from django.http import JsonResponse
 import re
 
 def home(request):
@@ -49,37 +51,125 @@ def quiz_question(request, quiz_id, question_id):
     }
     return render(request, 'quiz.html', context)
 
-@login_required
-def quiz_results(request, quiz_id):
-    quiz = get_object_or_404(Quiz, id=quiz_id)
-    user_answers = UserAnswer.objects.filter(user=request.user, quiz=quiz)
+#@login_required
+#def quiz_results(request, quiz_id):
+    #quiz = get_object_or_404(Quiz, id=quiz_id)
+    #user_answers = UserAnswer.objects.filter(user=request.user, quiz=quiz)
     
-    correct_answers = sum(1 for answer in user_answers if answer.is_correct())
-    total_questions = quiz.questions.count()
-    score = (correct_answers / total_questions) * 100 if total_questions > 0 else 0
+    #correct_answers = sum(1 for answer in user_answers if answer.is_correct())
+    #total_questions = quiz.questions.count()
+    #score = (correct_answers / total_questions) * 100 if total_questions > 0 else 0
     
     # Save the score in the UserAnswer model
-    for answer in user_answers:
-        answer.score = score  # Assign the score to each answer
-        answer.save()
+    #for answer in user_answers:
+        #answer.score = score  # Assign the score to each answer
+        #answer.save()
 
+    #context = {
+        #'quiz': quiz,
+        #'score': round(score, 1),
+        #'correct_answers': correct_answers,
+        #'total_questions': total_questions,
+        #'user_answers': user_answers
+    #}
+    #return render(request, 'results.html', context)
+@login_required
+def quiz_results(request, attempt_id):
+    quiz_attempt = get_object_or_404(QuizAttempt.objects.select_related('quiz'), id=attempt_id)
+    
+    # Ensure user can only view their own results
+    if quiz_attempt.user != request.user:
+        return redirect('home')
+    
+    user_answers = quiz_attempt.answers.all().select_related(
+        'question',
+        'selected_option'
+    )
+    
     context = {
-        'quiz': quiz,
-        'score': round(score, 1),
-        'correct_answers': correct_answers,
-        'total_questions': total_questions,
-        'user_answers': user_answers
+        'quiz_attempt': quiz_attempt,
+        'score': quiz_attempt.score,
+        'user_answers': user_answers,
+        'total_questions': user_answers.count(),
+        'correct_answers': sum(1 for answer in user_answers if answer.selected_option.is_correct)
     }
-    return render(request, 'results.html', context)
+    
+    return render(request, 'templates/results.html', context)
 
 def quiz_list(request):
     quizzes = Quiz.objects.all().order_by('-created_at')
     return render(request, 'quiz/quiz_list.html', {'quizzes': quizzes})
 
+#@login_required
+#def account_profile(request):
+    #quiz_attempts = UserAnswer.objects.filter(user=request.user).select_related('quiz').order_by('-created_at')  # Fetch quiz attempts
+    #return render(request, 'account/profile.html', {'quiz_attempts': quiz_attempts})
 @login_required
-def account_profile(request):
-    quiz_attempts = UserAnswer.objects.filter(user=request.user)  # Assuming UserAnswer tracks quiz attempts
-    return render(request, 'account/profile.html', {'quiz_attempts': quiz_attempts})
+def profile_view(request):
+    # Get user's quiz attempts with related quiz information
+    quiz_attempts = QuizAttempt.objects.filter(user=request.user)\
+        .select_related('quiz')\
+        .order_by('-created_at')
+    
+    context = {
+        'quiz_list': quiz_attempts,
+        'user': request.user
+    }
+    return render(request, 'account/profile.html', context)
+
+@login_required
+def submit_quiz(request, quiz_id):
+    if request.method != 'POST':
+        return JsonResponse({'error': 'Method not allowed'}, status=405)
+    
+    quiz = get_object_or_404(Quiz, id=quiz_id)
+    answers_data = request.POST.get('answers', None)
+    
+    if not answers_data:
+        return JsonResponse({'error': 'No answers provided'}, status=400)
+    
+    try:
+        answers = json.loads(answers_data)
+        total_questions = quiz.questions.count()
+        correct_answers = 0
+        
+        # Create quiz attempt
+        quiz_attempt = QuizAttempt.objects.create(
+            user=request.user,
+            quiz=quiz,
+            score=0  # Will be updated after calculating
+        )
+        
+        # Process each answer
+        for question_id, option_id in answers.items():
+            question = Question.objects.get(id=question_id)
+            selected_option = Option.objects.get(id=option_id)
+            
+            # Save user's answer
+            UserAnswer.objects.create(
+                quiz_attempt=quiz_attempt,
+                question=question,
+                selected_option=selected_option
+            )
+            
+            # Count correct answers
+            if selected_option.is_correct:
+                correct_answers += 1
+        
+        # Calculate and update score
+        score = (correct_answers / total_questions) * 100
+        quiz_attempt.score = round(score)
+        quiz_attempt.save()
+        
+        return JsonResponse({
+            'success': True,
+            'score': quiz_attempt.score,
+            'redirect_url': reverse('quiz_results', args=[quiz_attempt.id])
+        })
+        
+    except Exception as e:
+        return JsonResponse({'error': str(e)}, status=400)
+    
 
 # def signup(request):
 #     if request.method == 'POST':

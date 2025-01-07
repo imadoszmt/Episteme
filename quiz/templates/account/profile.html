@@ -201,62 +201,62 @@
 {% endblock%}
 {% block content %}
 <div class="container my-4" style="background-color: #f0f0f0; padding: 2rem; border-radius: 20px;">
-<div class="row">
-    <!-- Profile Card -->
-    <div class="col-md-4">
-        <div class="card profile-card">
-            <div class="card-body text-center">
-                <div class="profile-avatar">
-                    {{ user.username|first|upper }}
-                </div>
-                <h3 class="profile-username">{{ user.username }}</h3>
-                <div class="profile-meta">
-                    <p class="mb-1">Member since {{ user.date_joined|date:"F j, Y" }}</p>
-                    <p class="mb-0">{{ user.email }}</p>
-                </div>
-                <div class="mt-3">
-                    <a href="{% url 'password_change' %}" class="btn change-password-btn">Change Password</a>
+    <div class="row">
+        <!-- Profile Card -->
+        <div class="col-md-4">
+            <div class="card profile-card">
+                <div class="card-body text-center">
+                    <div class="profile-avatar">
+                        {{ user.username|first|upper }}
+                    </div>
+                    <h3 class="profile-username">{{ user.username }}</h3>
+                    <div class="profile-meta">
+                        <p class="mb-1">Member since {{ user.date_joined|date:"F j, Y" }}</p>
+                        <p class="mb-0">{{ user.email }}</p>
+                    </div>
+                    <div class="mt-3">
+                        <a href="{% url 'password_change' %}" class="btn change-password-btn">Change Password</a>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- Quiz History Card -->
-    <div class="col-md-8">
-        <div class="card history-card">
-            <div class="card-body">
-                <h4>Quiz History</h4>
-                <div class="table-responsive">
-                    <table class="quiz-table">
-                        <thead>
-                            <tr>
-                                <th>Quiz</th>
-                                <th>Score</th>
-                                <th>Date</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for attempt in quiz_list %}
-                            <tr>
-                                <td>{{ attempt.quiz.title }}</td>
-                                <td>{{ attempt.score }}%</td>
-                                <td>{{ attempt.created_at|date:"F j, Y" }}</td>
-                                <td>
-                                    <a href="{% url 'quiz_results' attempt.quiz.id %}" class="btn btn-sm btn-primary">View Results</a>
-                                </td>
-                            </tr>
-                            {% empty %}
-                            <tr>
-                                <td colspan="4" class="text-center">No quizzes taken yet</td>
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
+        <!-- Quiz History Card -->
+        <div class="col-md-8">
+            <div class="card history-card">
+                <div class="card-body">
+                    <h4>Quiz History</h4>
+                    <div class="table-responsive">
+                        <table class="quiz-table">
+                            <thead>
+                                <tr>
+                                    <th>Quiz</th>
+                                    <th>Score</th>
+                                    <th>Date</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for attempt in quiz_attempts %}
+                                <tr>
+                                    <td>{{ attempt.quiz.title }}</td>
+                                    <td>{{ attempt.score }}%</td>
+                                    <td>{{ attempt.created_at|date:"F j, Y" }}</td>
+                                    <td>
+                                        <a href="{% url 'quiz_results' attempt.quiz.id %}" class="btn btn-sm btn-primary">View Results</a>
+                                    </td>
+                                </tr>
+                                {% empty %}
+                                <tr>
+                                    <td colspan="4" class="text-center">No quizzes taken yet</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 </div>
 {% endblock %}

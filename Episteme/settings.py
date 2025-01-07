@@ -71,6 +71,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
+            
             os.path.join(BASE_DIR, 'templates'),
             os.path.join(BASE_DIR, 'quiz', 'templates'),
         ],
@@ -165,8 +166,8 @@ REST_FRAMEWORK = {
 } 
 
 
-LOGIN_REDIRECT_URL = 'quiz:home'
-LOGOUT_REDIRECT_URL = 'quiz:home'
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
 LOGIN_URL = 'account_login'
 
 # Email settings (for development)
@@ -184,6 +185,9 @@ ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE = True
 ACCOUNT_USERNAME_MIN_LENGTH = 4
 ACCOUNT_SIGNUP_TEMPLATE = 'account/signup.html'
 ACCOUNT_LOGIN_TEMPLATE = 'account/login.html'
+SOCIALACCOUNT_QUERY_EMAIL = True
+SOCIALACCOUNT_LOGIN_ON_GET = True  # Automatically starts login flow without a POST
+ACCOUNT_LOGOUT_REDIRECT_URL = '/'
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [

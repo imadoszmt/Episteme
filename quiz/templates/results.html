@@ -32,13 +32,13 @@
                 
                 <div class="mb-3">
                     <strong>Your Answer:</strong> 
-                    <span>{{ answer.user_answer.text }}</span>
+                    <span>{{ answer.selected_option.text }}</span>
                 </div>
                 
                 {% if not answer.is_correct %}
                 <div class="mb-3">
                     <strong>Correct Answer:</strong>
-                    <span>{{ answer.correct_answer.text }}</span>
+                    <span>{{ answer.question.correct_answer }}</span>
                 </div>
                 {% endif %}
                 

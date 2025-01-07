@@ -1,5 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils import timezone
+from django.core.validators import MinValueValidator, MaxValueValidator
+
 
 class Quiz(models.Model):
     LEVEL_CHOICES = [
@@ -74,15 +77,6 @@ class Option(models.Model):
     def __str__(self):
         return self.text
 
-class UserAnswer(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE)
-    question = models.ForeignKey(Question, on_delete=models.CASCADE)
-    selected_option = models.ForeignKey(Option, on_delete=models.CASCADE)
-    score = models.IntegerField(null=True, blank=True)
-
-    def is_correct(self):
-        return self.selected_option.is_correct
 
 class QuizSession(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -109,3 +103,36 @@ class Badge(models.Model):
 
     def __str__(self):
         return self.name
+
+class QuizAttempt(models.Model):
+    user = models.ForeignKey(User, related_name='quiz_attempts', on_delete=models.CASCADE)
+    quiz = models.ForeignKey(Quiz, related_name='attempts', on_delete=models.CASCADE)
+    score = models.IntegerField(
+        validators=[MinValueValidator(0), MaxValueValidator(100)]
+    )
+    created_at = models.DateTimeField(auto_now_add=True)
+    
+    class Meta:
+        ordering = ['-created_at']  # Show most recent attempts first
+
+    def __str__(self):
+        return f"{self.user.username}'s attempt at {self.quiz.title}"
+
+
+class UserAnswer(models.Model):
+    quiz_attempt = models.ForeignKey(QuizAttempt, related_name='answers', on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE)
+    question = models.ForeignKey(Question, on_delete=models.CASCADE)
+    selected_option = models.ForeignKey(Option, on_delete=models.CASCADE)
+    score = models.IntegerField(null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['created_at']
+
+    def __str__(self):
+        return f"Answer by {self.quiz_attempt.user.username} for {self.question}"
+    
+    def is_correct(self):
+        return self.selected_option.is_correct
