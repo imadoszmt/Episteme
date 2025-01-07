@@ -1,7 +1,7 @@
 from django.urls import path
 from .views import (
-    signup,
-    login_view,
+    #signup,
+    #login_view,
     account_profile,
     quiz_list,
     quiz_detail,
@@ -22,8 +22,8 @@ app_name = 'quiz'
 urlpatterns = [
     path('', home, name='home'),
     path('quizzes/', quiz_list, name='quiz_list'),  
-    path('signup/', signup, name='account_signup'),
-    path('login/', login_view, name='account_login'),
+    #path('signup/', signup, name='account_signup'),
+    #path('login/', login_view, name='account_login'),
     path('profile/', account_profile, name='account_profile'),
     path('logout/', logout_view, name='logout'),
     path('quiz/<int:quiz_id>/', quiz_detail, name='quiz_detail'),

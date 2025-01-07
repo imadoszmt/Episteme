@@ -79,6 +79,7 @@ class UserAnswer(models.Model):
     quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE)
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
     selected_option = models.ForeignKey(Option, on_delete=models.CASCADE)
+    score = models.IntegerField(null=True, blank=True)
 
     def is_correct(self):
         return self.selected_option.is_correct

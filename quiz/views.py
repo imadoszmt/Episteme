@@ -58,6 +58,11 @@ def quiz_results(request, quiz_id):
     total_questions = quiz.questions.count()
     score = (correct_answers / total_questions) * 100 if total_questions > 0 else 0
     
+    # Save the score in the UserAnswer model
+    for answer in user_answers:
+        answer.score = score  # Assign the score to each answer
+        answer.save()
+
     context = {
         'quiz': quiz,
         'score': round(score, 1),
@@ -76,65 +81,66 @@ def account_profile(request):
     quiz_attempts = UserAnswer.objects.filter(user=request.user)  # Assuming UserAnswer tracks quiz attempts
     return render(request, 'account/profile.html', {'quiz_attempts': quiz_attempts})
 
-def signup(request):
-    if request.method == 'POST':
-        username = request.POST.get('username')
-        email = request.POST.get('email')
-        password1 = request.POST.get('password1')
-        password2 = request.POST.get('password2')
+# def signup(request):
+#     if request.method == 'POST':
+#         username = request.POST.get('username')
+#         email = request.POST.get('email')
+#         password1 = request.POST.get('password1')
+#         password2 = request.POST.get('password2')
 
-        # Validate email format
-        if not re.match(r"[^@]+@[^@]+\.[^@]+", email):
-            messages.error(request, 'Invalid email format.')
-            return render(request, 'account/signup.html')
+#         # Validate email format
+#         if not re.match(r"[^@]+@[^@]+\.[^@]+", email):
+#             messages.error(request, 'Invalid email format.')
+#             return render(request, 'account/signup.html')
 
-        # Validate username uniqueness
-        if User.objects.filter(username=username).exists():
-            messages.error(request, 'Username already exists.')
-            return render(request, 'account/signup.html')
+#         # Validate username uniqueness
+#         if User.objects.filter(username=username).exists():
+#             messages.error(request, 'Username already exists.')
+#             return render(request, 'account/signup.html')
 
-        # Validate password complexity
-        if len(password1) < 8:  # Check for minimum length
-            messages.error(request, 'Password must be at least 8 characters long.')
-            return render(request, 'account/signup.html')
+#         # Validate password complexity
+#         if len(password1) < 8:  # Check for minimum length
+#             messages.error(request, 'Password must be at least 8 characters long.')
+#             return render(request, 'account/signup.html')
 
-        if not re.search(r"[A-Za-z]", password1):  # Check for letters
-            messages.error(request, 'Password must contain at least one letter.')
-            return render(request, 'account/signup.html')
+#         if not re.search(r"[A-Za-z]", password1):  # Check for letters
+#             messages.error(request, 'Password must contain at least one letter.')
+#             return render(request, 'account/signup.html')
 
-        if not re.search(r"\d", password1):  # Check for numbers
-            messages.error(request, 'Password must contain at least one number.')
-            return render(request, 'account/signup.html')
+#         if not re.search(r"\d", password1):  # Check for numbers
+#             messages.error(request, 'Password must contain at least one number.')
+#             return render(request, 'account/signup.html')
 
-        if password1.isdigit():  # Check if password is purely numeric
-            messages.error(request, 'Password cannot be entirely numeric.')
-            return render(request, 'account/signup.html')
+#         if password1.isdigit():  # Check if password is purely numeric
+#             messages.error(request, 'Password cannot be entirely numeric.')
+#             return render(request, 'account/signup.html')
 
-        # Check if passwords match
-        if password1 == password2:
-            try:
-                user = User.objects.create_user(username=username, email=email, password=password1)
-                user.save()
-                login(request, user)  # Log the user in after registration
-                messages.success(request, 'Account created successfully! Redirecting to your profile...')
-                return redirect('account_profile')  # Redirect to the profile page
-            except Exception as e:
-                messages.error(request, f'Error creating account: {e}')
-        else:
-            messages.error(request, 'Passwords do not match.')
-    return render(request, 'account/signup.html')
+#         # Check if passwords match
+#         if password1 == password2:
+#             try:
+#                 user = User.objects.create_user(username=username, email=email, password=password1)
+#                 user.save()
+#                 login(request, user)  # Log the user in after registration
+#                 messages.success(request, 'Account created successfully! Redirecting to your profile...')
+#                 return redirect('account_profile')  # Redirect to the profile page
+#             except Exception as e:
+#                 messages.error(request, f'Error creating account: {e}')
+#         else:
+#             messages.error(request, 'Passwords do not match.')
+#     return render(request, 'account/signup.html')
+# # End of Selection
 
-def login_view(request):
-    if request.method == 'POST':
-        login_param = request.POST.get('login')  # This can be username or email
-        password = request.POST.get('password')
-        user = authenticate(request, username=login_param, password=password)
-        if user is not None:
-            login(request, user)
-            return redirect('account_profile')  # Redirect to profile after login
-        else:
-            messages.error(request, 'Invalid username or password.')
-    return render(request, 'account/login.html')
+#def login_view(request):
+    #if request.method == 'POST':
+        #login_param = request.POST.get('login')  # This can be username or email
+        #password = request.POST.get('password')
+        #user = authenticate(request, username=login_param, password=password)
+        #if user is not None:
+            #login(request, user)
+            #return redirect('account_profile')  # Redirect to profile after login
+        #else:
+            #messages.error(request, 'Invalid username or password.')
+    #return render(request, 'account/login.html')
 
 def networking_quiz(request):
     questions = [

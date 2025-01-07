@@ -55,5 +55,11 @@
         </div>
     </div>
 </div>
+
+<script src="//accounts.google.com/gsi/client" async></script>
+<div id="g_id_onload"
+     data-client_id="YOUR_CLIENT_ID.apps.googleusercontent.com"
+     data-login_uri="{% url 'google_login_by_token' %}">
+</div>
 {% endblock %}
 
