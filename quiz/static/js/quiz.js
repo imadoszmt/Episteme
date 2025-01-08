@@ -137,6 +137,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 //Added js template for handling quiz dunctionality//
+/*
 document.addEventListener('DOMContentLoaded', function() {
     let currentQuestionIndex = 0;
     const answers = {};
@@ -252,4 +253,4 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Initialize first question
     updateQuestion();
-});
+});*/

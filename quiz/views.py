@@ -1,9 +1,12 @@
+import json
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
+from django.urls import reverse
 from .models import Quiz, Question, UserAnswer, Option, QuizAttempt
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import logout, login, authenticate
+from django.shortcuts import redirect
 from django.db.models import Prefetch
 from django.http import JsonResponse
 import re
@@ -11,10 +14,10 @@ import re
 def home(request):
     return render(request, 'home.html')
 
-def logout_view(request):
+# Custom logout view
+def direct_logout(request):
     logout(request)
-    messages.success(request, 'You have been logged out successfully.')
-    return redirect('home')
+    return redirect('/')  # Redirect to homepage or desired URL
 
 @login_required
 def quiz_detail(request, quiz_id):

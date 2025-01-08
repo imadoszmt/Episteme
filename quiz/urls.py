@@ -1,4 +1,7 @@
 from django.urls import path
+#from django.contrib.auth.views import LogoutView
+#from django.contrib.auth import logout
+#from django.shortcuts import redirect
 from .views import (
     #signup,
     #login_view,
@@ -15,7 +18,9 @@ from .views import (
     python_quiz,
     javascript_quiz,
     c_programming_quiz,
+    direct_logout,
 )
+
 
 app_name = 'quiz'
 
@@ -26,6 +31,8 @@ urlpatterns = [
     #path('login/', login_view, name='account_login'),
     path('profile/', profile_view, name='profile_view'),
     #path('logout/', logout_view, name='logout'),
+    #path('accounts/logout/', LogoutView.as_view(next_page='/'), name='account_logout'),
+    path('accounts/logout/', direct_logout, name='account_logout'),
     path('quiz/<int:quiz_id>/', quiz_detail, name='quiz_detail'),
     path('quiz/<int:quiz_id>/question/<int:question_id>/', quiz_question, name='quiz_question'),
     path('quiz/<int:quiz_id>/results/', quiz_results, name='quiz_results'),

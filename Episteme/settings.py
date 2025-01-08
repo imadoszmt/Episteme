@@ -188,6 +188,7 @@ ACCOUNT_LOGIN_TEMPLATE = 'account/login.html'
 SOCIALACCOUNT_QUERY_EMAIL = True
 SOCIALACCOUNT_LOGIN_ON_GET = True  # Automatically starts login flow without a POST
 ACCOUNT_LOGOUT_REDIRECT_URL = '/'
+ACCOUNT_LOGOUT_ON_GET = True  # Logs out immediately when the logout URL is accessed
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
