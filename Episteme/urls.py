@@ -29,6 +29,6 @@ urlpatterns = [
     #path('accounts/login/', TemplateView.as_view(template_name='account/login.html'), name='socialaccount_login'),
     #path('accounts/signup/', TemplateView.as_view(template_name='account/signup.html'), name='account_signup'),
     
-    # Keep your quiz URLs
+    # quiz URLs
     path('', include('quiz.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -243,7 +243,7 @@
                                     <td>{{ attempt.score }}%</td>
                                     <td>{{ attempt.created_at|date:"F j, Y" }}</td>
                                     <td>
-                                        <a href="{% url 'quiz_results' attempt.quiz.id %}" class="btn btn-sm btn-primary">View Results</a>
+                                        <a href="{% url 'quiz_results' attempt.id %}" class="btn btn-sm btn-primary">View Results</a>
                                     </td>
                                 </tr>
                                 {% empty %}

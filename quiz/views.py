@@ -97,7 +97,7 @@ def quiz_results(request, attempt_id):
         'correct_answers': sum(1 for answer in user_answers if answer.selected_option.is_correct)
     }
     
-    return render(request, 'templates/results.html', context)
+    return render(request, 'results.html', context)
 
 def quiz_list(request):
     quizzes = Quiz.objects.all().order_by('-created_at')
@@ -115,7 +115,7 @@ def profile_view(request):
         .order_by('-created_at')
     
     context = {
-        'quiz_list': quiz_attempts,
+        'quiz_attempts': quiz_attempts,
         'user': request.user
     }
     return render(request, 'account/profile.html', context)

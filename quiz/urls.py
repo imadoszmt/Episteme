@@ -1,16 +1,11 @@
 from django.urls import path
-#from django.contrib.auth.views import LogoutView
-#from django.contrib.auth import logout
-#from django.shortcuts import redirect
 from .views import (
-    #signup,
-    #login_view,
     profile_view,
     quiz_list,
     quiz_detail,
     quiz_question,
     quiz_results,
-    #logout_view,
+    direct_logout,
     home,
     networking_quiz,
     web_programming_quiz,
@@ -18,20 +13,14 @@ from .views import (
     python_quiz,
     javascript_quiz,
     c_programming_quiz,
-    direct_logout,
 )
-
 
 app_name = 'quiz'
 
 urlpatterns = [
     path('', home, name='home'),
-    path('quizzes/', quiz_list, name='quiz_list'),  
-    #path('signup/', signup, name='account_signup'),
-    #path('login/', login_view, name='account_login'),
+    path('quizzes/', quiz_list, name='quiz_list'),
     path('profile/', profile_view, name='profile_view'),
-    #path('logout/', logout_view, name='logout'),
-    #path('accounts/logout/', LogoutView.as_view(next_page='/'), name='account_logout'),
     path('accounts/logout/', direct_logout, name='account_logout'),
     path('quiz/<int:quiz_id>/', quiz_detail, name='quiz_detail'),
     path('quiz/<int:quiz_id>/question/<int:question_id>/', quiz_question, name='quiz_question'),
@@ -42,4 +31,4 @@ urlpatterns = [
     path('quizzes/python/', python_quiz, name='python_quiz'),
     path('quizzes/javascript/', javascript_quiz, name='javascript_quiz'),
     path('quizzes/cprogramming/', c_programming_quiz, name='c_programming_quiz'),
-] 
+]

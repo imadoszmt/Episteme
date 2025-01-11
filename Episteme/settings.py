@@ -137,13 +137,13 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
-STATIC_URL = '/static/'
+#STATIC_URL = '/static/'
 
-STATICFILES_DIRS = [
-    BASE_DIR / 'quiz' / 'static',
-]
+#STATICFILES_DIRS = [
+#    BASE_DIR / 'quiz' / 'static',
+#]
 
-STATIC_ROOT = BASE_DIR / 'staticfiles'
+#STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
@@ -190,6 +190,7 @@ SOCIALACCOUNT_LOGIN_ON_GET = True  # Automatically starts login flow without a P
 ACCOUNT_LOGOUT_REDIRECT_URL = '/'
 ACCOUNT_LOGOUT_ON_GET = True  # Logs out immediately when the logout URL is accessed
 
+# Static files (CSS, JavaScript, Images)
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'quiz/static'),
