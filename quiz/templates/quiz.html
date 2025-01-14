@@ -1,82 +1,44 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}{{ quiz.title }} | Episteme{% endblock %}
 
+{% block extra_css %}
+<link href="{% static 'css/quiz.css' %}" rel="stylesheet">
+{% endblock %}
+
 {% block content %}
-<div class="quiz-container">
-    <!-- Progress Bar -->
-    <div class="progress mb-4">
-        <div class="progress-bar" role="progressbar" style="width: {{ progress }}%"></div>
-    </div>
-
-    <!-- Timer -->
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <h4>Question {{ current_question_no }} of {{ total_questions }}</h4>
-        <div id="timer" class="badge bg-primary p-2">Time: <span>00:00</span></div>
-    </div>
-
-    <!-- Question Card -->
-    <div class="card question-card">
-        <div class="card-body">
-            <h2 class="card-title mb-4">{{ question.text }}</h2>
-            {% if question.image %}
-                <img src="{{ question.image.url }}" alt="Question Image" class="img-fluid mb-4">
-            {% endif %}
-
-            <form id="questionForm" method="post">
-                {% csrf_token %}
-                {% for option in question.options.all %}
-                    <div class="option-item" onclick="selectOption(this, '{{ option.id }}')">
-                        <input type="radio" name="answer" value="{{ option.id }}" class="d-none">
-                        {{ option.text }}
-                    </div>
-                {% endfor %}
-            </form>
+<div class="hero-background">
+    <header class="header">
+        <div class="logo">
+            <h1>{{ quiz.title }}</h1>
         </div>
-    </div>
+    </header>
 
-    <!-- Navigation -->
-    <div class="d-flex justify-content-between mt-4">
-        <button class="btn btn-secondary" {% if not prev_question %}disabled{% endif %}
-                onclick="location.href='{% url 'quiz_question' quiz.id prev_question.id %}'">
-            Previous
-        </button>
-        <button class="btn btn-primary" onclick="submitAnswer()">
-            {% if is_last_question %}Finish{% else %}Next{% endif %}
-        </button>
+    <div class="quiz-container">
+        <div id="question-container" class="question-card">
+            <h2 id="question-text" class="question-text">{{ questions.0.text }}</h2>
+            <ul id="options-list" class="list-group">
+                {% for option in questions.0.options %}
+                <li class="list-group-item answer-option">{{ option }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        
+        <div class="quiz-navigation">
+            <button id="back-button" class="nav-button btn btn-secondary" disabled>Back</button>
+            <div id="progress" class="progress-indicator">1 of {{ totalQuestions }}</div>
+            <button id="next-button" class="nav-button btn btn-primary">Next</button>
+        </div>
+        <div id="result-message" class="result-message mt-3"></div>
     </div>
 </div>
 {% endblock %}
 
 {% block extra_js %}
 <script>
-    let timer;
-    let seconds = 0;
-
-    function startTimer() {
-        timer = setInterval(() => {
-            seconds++;
-            document.querySelector('#timer span').textContent = 
-                new Date(seconds * 1000).toISOString().substr(14, 5);
-        }, 1000);
-    }
-
-    function selectOption(element, optionId) {
-        document.querySelectorAll('.option-item').forEach(item => 
-            item.classList.remove('selected'));
-        element.classList.add('selected');
-        element.querySelector('input').checked = true;
-    }
-
-    function submitAnswer() {
-        const form = document.getElementById('questionForm');
-        if (form.answer.value) {
-            form.submit();
-        } else {
-            alert('Please select an answer');
-        }
-    }
-
-    document.addEventListener('DOMContentLoaded', startTimer);
+    const questionsQuiz = {{ questions|safe }};
+    const totalQuestions = questionsQuiz.length;
 </script>
+<script src="{% static 'js/quiz.js' %}"></script>
 {% endblock %}

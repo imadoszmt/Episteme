@@ -109,7 +109,7 @@
                         <span class="badge level-badge">{{ quiz.level|title }}</span>
                         <span class="badge time-badge">{{ quiz.estimated_time }} min</span>
                     </div>
-                    <a href="{% url 'quiz_detail' quiz.id %}" class="btn start-quiz-btn">Start Quiz</a>
+                    <a href="{% url 'quiz:quiz_detail' quiz.id %}" class="btn start-quiz-btn">Start Quiz</a>
                 </div>
             </div>
         </div>

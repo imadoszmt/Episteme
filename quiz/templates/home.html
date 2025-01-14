@@ -22,7 +22,7 @@
             {% for quiz in featured_quizzes %}
             <div class="col-md-4">
                 <div class="card course-card">
-                    <span class="course-badge">{{ quiz.category }}</span>
+                    <span class="course-badge">{{ quiz.level|title }}</span>
                     <h3 class="course-title">{{ quiz.title }}</h3>
                     <p class="course-description">{{ quiz.description }}</p>
                     <div class="course-meta">
@@ -30,7 +30,7 @@
                             <i class="bi bi-clock"></i>
                             <span>{{ quiz.duration }} mins</span>
                         </div>
-                        <a href="{% url 'quiz:start_quiz' quiz.id %}" class="btn btn-sm btn-primary">Start Quiz</a>
+                        <a href="{% url 'quiz:quiz_detail' quiz.id %}" class="btn btn-sm btn-primary">Start Quiz</a>
                     </div>
                 </div>
             </div>

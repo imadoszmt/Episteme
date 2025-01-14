@@ -7,12 +7,15 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import logout, login, authenticate
 from django.shortcuts import redirect
-from django.db.models import Prefetch
+from django.db.models import Prefetch, Count
 from django.http import JsonResponse
 import re
 
 def home(request):
-    return render(request, 'home.html')
+    # Get the most taken quizzes
+    featured_quizzes = Quiz.objects.annotate(attempt_count=Count('attempts')).order_by('-attempt_count')[:3]  # Get top 3 quizzes
+
+    return render(request, 'home.html', {'featured_quizzes': featured_quizzes})
 
 # Custom logout view
 def direct_logout(request):
@@ -22,7 +25,23 @@ def direct_logout(request):
 @login_required
 def quiz_detail(request, quiz_id):
     quiz = get_object_or_404(Quiz, id=quiz_id)
-    return render(request, 'quiz.html', {'quiz': quiz})
+    
+    # Get all questions and their options for this quiz
+    questions = []
+    for question in quiz.questions.all():
+        question_data = {
+            'text': question.text,  # This should now work with the added field
+            'options': [{'id': option.id, 'text': option.text} for option in question.options.all()],
+            'correct_answer': question.correct_option.text if question.correct_option else None
+        }
+        questions.append(question_data)
+    
+    context = {
+        'quiz': quiz,
+        'questions': json.dumps(questions),
+        'totalQuestions': len(questions)
+    }
+    return render(request, 'quiz.html', context)
 
 @login_required
 def quiz_question(request, quiz_id, question_id):
@@ -48,7 +67,6 @@ def quiz_question(request, quiz_id, question_id):
         'question': question,
         'current_question_no': quiz.get_question_number(question),
         'total_questions': quiz.questions.count(),
-        'progress': quiz.get_progress(question),
         'prev_question': quiz.get_previous_question(question),
         'is_last_question': quiz.is_last_question(question)
     }
