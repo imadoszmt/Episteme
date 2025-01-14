@@ -5,7 +5,16 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 
 
 class Quiz(models.Model):
-    LEVEL_CHOICES = [
+    QUIZ_TYPES = [
+        ('web_programming', 'Web Programming'),
+        ('database', 'Database'),
+        ('python', 'Python'),
+        ('javascript', 'JavaScript'),
+        ('c_programming', 'C Programming'),
+        ('networking', 'Networking'),
+    ]
+
+    LEVELS = [
         ('easy', 'Easy'),
         ('medium', 'Medium'),
         ('hard', 'Hard'),
@@ -13,11 +22,12 @@ class Quiz(models.Model):
 
     title = models.CharField(max_length=200)
     description = models.TextField()
-    level = models.CharField(max_length=10, choices=LEVEL_CHOICES, default='easy')
-    duration = models.IntegerField(help_text="Duration in minutes")
+    created_at = models.DateTimeField(auto_now_add=True)
+    duration = models.IntegerField(help_text='Duration in minutes')
+    quiz_type = models.CharField(max_length=50, choices=QUIZ_TYPES, default='web_programming')
+    level = models.CharField(max_length=10, choices=LEVELS, default='easy')
     is_free = models.BooleanField(default=True)
     is_friendly = models.BooleanField(default=False)
-    created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     def get_next_question(self, current_question):

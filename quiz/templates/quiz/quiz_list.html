@@ -109,13 +109,13 @@
                         <span class="badge level-badge">{{ quiz.level|title }}</span>
                         <span class="badge time-badge">{{ quiz.estimated_time }} min</span>
                     </div>
-                    <a href="{% url 'quiz:quiz_detail' quiz.id %}" class="btn start-quiz-btn">Start Quiz</a>
+                    <a href="{% url 'quiz:quiz_question' quiz.id quiz.questions.first.id %}" class="btn start-quiz-btn">Start Quiz</a>
                 </div>
             </div>
         </div>
         {% endfor %}
 
-        <!-- Networking Basics Quiz Card -->
+        <!-- Networking Basics Quiz Card 
         <div class="quiz-card card">
             <div class="card-body d-flex flex-column">
                 <h5 class="card-title">Networking Basics </h5>
@@ -130,7 +130,7 @@
             </div>
         </div>
 
-        <!-- Web Programming Basics Card -->
+        <!-- Web Programming Basics Card 
         <div class="quiz-card card">
             <div class="card-body d-flex flex-column">
                 <h5 class="card-title">Web Programming Basics</h5>
@@ -145,7 +145,7 @@
             </div>
         </div>
 
-        <!-- Database Basics Card -->
+        <!-- Database Basics Card 
         <div class="quiz-card card">
             <div class="card-body d-flex flex-column">
                 <h5 class="card-title">Database Basics</h5>
@@ -160,7 +160,7 @@
             </div>
         </div>
 
-        <!-- Python Basics Card -->
+        <!-- Python Basics Card 
         <div class="quiz-card card">
             <div class="card-body d-flex flex-column">
                 <h5 class="card-title">Python Basics</h5>
@@ -175,7 +175,7 @@
             </div>
         </div>
 
-        <!-- JavaScript Basics Card -->
+        <!-- JavaScript Basics Card 
         <div class="quiz-card card">
             <div class="card-body d-flex flex-column">
                 <h5 class="card-title">JavaScript Basics</h5>
@@ -190,7 +190,7 @@
             </div>
         </div>
 
-        <!-- C programming Basics Card -->
+        <!-- C programming Basics Card 
         <div class="quiz-card card">
             <div class="card-body d-flex flex-column">
                 <h5 class="card-title">C Programming Basics</h5>
@@ -204,6 +204,7 @@
                 </div>
             </div>
         </div>
+    -->
     </div>
 </div>
 {% endblock %}

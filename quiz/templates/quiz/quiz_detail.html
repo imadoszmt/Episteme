@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="quiz-detail">
+        <h2>{{ quiz.title }}</h2>
+        <p class="description">{{ quiz.description }}</p>
+        <div class="quiz-info">
+            <span class="badge level-badge">{{ quiz.level|title }}</span>
+            <span class="badge time-badge">{{ quiz.duration }} min</span>
+        </div>
+        <div class="mt-4">
+            <a href="{% url 'quiz:quiz_question' quiz.id quiz.questions.first.id %}" class="btn btn-primary">Start Quiz</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

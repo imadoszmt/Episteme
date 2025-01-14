@@ -1,34 +1,21 @@
 from django.urls import path
-from .views import (
-    profile_view,
-    quiz_list,
-    quiz_detail,
-    quiz_question,
-    quiz_results,
-    direct_logout,
-    home,
-    networking_quiz,
-    web_programming_quiz,
-    database_quiz,
-    python_quiz,
-    javascript_quiz,
-    c_programming_quiz,
-)
+from . import views
 
 app_name = 'quiz'
 
 urlpatterns = [
-    path('', home, name='home'),
-    path('quizzes/', quiz_list, name='quiz_list'),
-    path('profile/', profile_view, name='profile_view'),
-    path('accounts/logout/', direct_logout, name='account_logout'),
-    path('quiz/<int:quiz_id>/', quiz_detail, name='quiz_detail'),
-    path('quiz/<int:quiz_id>/question/<int:question_id>/', quiz_question, name='quiz_question'),
-    path('quiz/<int:quiz_id>/results/', quiz_results, name='quiz_results'),
-    path('quizzes/networking/', networking_quiz, name='networking_quiz'),
-    path('quizzes/webprogramming/', web_programming_quiz, name='web_programming_quiz'),
-    path('quizzes/database/', database_quiz, name='database_quiz'),
-    path('quizzes/python/', python_quiz, name='python_quiz'),
-    path('quizzes/javascript/', javascript_quiz, name='javascript_quiz'),
-    path('quizzes/cprogramming/', c_programming_quiz, name='c_programming_quiz'),
+    path('', views.home, name='home'),
+    path('quizzes/', views.quiz_list, name='quiz_list'),
+    path('profile/', views.profile_view, name='profile_view'),
+    path('accounts/logout/', views.direct_logout, name='account_logout'),
+    path('quiz/<int:quiz_id>/', views.quiz_detail, name='quiz_detail'),
+    path('quiz/<int:quiz_id>/question/<int:question_id>/', views.quiz_question, name='quiz_question'),
+    path('quiz/attempt/<int:attempt_id>/results/', views.quiz_results, name='quiz_results'),
+    path('quizzes/networking/', views.networking_quiz, name='networking_quiz'),
+    path('quizzes/webprogramming/', views.web_programming_quiz, name='web_programming_quiz'),
+    path('quizzes/database/', views.database_quiz, name='database_quiz'),
+    path('quizzes/python/', views.python_quiz, name='python_quiz'),
+    path('quizzes/javascript/', views.javascript_quiz, name='javascript_quiz'),
+    path('quizzes/cprogramming/', views.c_programming_quiz, name='c_programming_quiz'),
+    path('quiz/<int:quiz_id>/start/', views.quiz_question, name='start_quiz'),
 ]

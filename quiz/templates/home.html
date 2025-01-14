@@ -17,22 +17,32 @@
 
 <section class="py-5 featured-quizzes">
     <div class="container">
-        <h2 class="text-center mb-5">Featured Quizzes</h2>
+        <h2 class="text-center mb-5">Most Popular Quizzes</h2>
         <div class="row g-4">
             {% for quiz in featured_quizzes %}
             <div class="col-md-4">
                 <div class="card course-card">
-                    <span class="course-badge">{{ quiz.level|title }}</span>
+                    <span class="course-badge">{{ quiz.quiz_type|title }}</span>
                     <h3 class="course-title">{{ quiz.title }}</h3>
-                    <p class="course-description">{{ quiz.description }}</p>
+                    <p class="course-description">{{ quiz.description|truncatechars:100 }}</p>
                     <div class="course-meta">
-                        <div class="meta-item">
-                            <i class="bi bi-clock"></i>
-                            <span>{{ quiz.duration }} mins</span>
+                        <div class="meta-stats">
+                            <div class="meta-item">
+                                <i class="bi bi-clock"></i>
+                                <span>{{ quiz.duration }} mins</span>
+                            </div>
+                            <div class="meta-item">
+                                <i class="bi bi-people"></i>
+                                <span>{{ quiz.attempts.count }} attempts</span>
+                            </div>
                         </div>
-                        <a href="{% url 'quiz:quiz_detail' quiz.id %}" class="btn btn-sm btn-primary">Start Quiz</a>
+                        <a href="{% url 'quiz:quiz_question' quiz.id quiz.questions.first.id %}" class="btn btn-sm btn-primary">Start Quiz</a>
                     </div>
                 </div>
+            </div>
+            {% empty %}
+            <div class="col-12 text-center">
+                <p>No quizzes available yet.</p>
             </div>
             {% endfor %}
         </div>

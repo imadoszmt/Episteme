@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="hero-background">
+    <header class="header">
+        <div class="logo">
+            <h1>{{ quiz.title }}</h1>
+        </div>
+    </header>
+
+    <div class="quiz-container">
+        {% csrf_token %}
+        <div id="question-container" class="question-card">
+            <h2 id="question-text" class="question-text"></h2>
+            <ul id="options-list" class="list-group"></ul>
+        </div>
+        
+        <div class="quiz-navigation">
+            <button id="back-button" class="nav-button btn btn-secondary">Back</button>
+            <div id="progress" class="progress-indicator"></div>
+            <button id="next-button" class="nav-button btn btn-primary">Next</button>
+        </div>
+        <div id="result-message" class="result-message mt-3"></div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/quiz.css' %}">
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    const questionsQuiz = {{ questions|safe }};
+    const totalQuestions = {{ total_questions }};
+</script>
+<script src="{% static 'js/quiz.js' %}"></script>
+{% endblock %}
