@@ -1,3 +1,4 @@
+from .models import Quiz
 def get_quiz_questions(quiz_type):
     quiz = Quiz.objects.get(quiz_type=quiz_type)
     questions = []

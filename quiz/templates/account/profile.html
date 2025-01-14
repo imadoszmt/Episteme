@@ -197,6 +197,38 @@
             font-size: 0.8rem;
         }
     }
+
+    .btn-group .btn {
+        margin: 0 2px;
+    }
+    
+    .btn-danger {
+        background-color: #dc3545;
+    }
+    
+    .btn-danger:hover {
+        background-color: #bb2d3b;
+    }
+    
+    .modal-content {
+        background-color: var(--card-bg);
+        color: var(--text-primary);
+    }
+    
+    .modal-header, .modal-footer {
+        border-color: var(--border-color);
+    }
+    
+    .attempt-details {
+        background-color: var(--bg-secondary);
+        padding: 1rem;
+        border-radius: 8px;
+        margin-top: 1rem;
+    }
+    
+    .attempt-details p:last-child {
+        margin-bottom: 0;
+    }
 </style>
 {% endblock%}
 {% block content %}
@@ -243,7 +275,36 @@
                                     <td>{{ attempt.score }}%</td>
                                     <td>{{ attempt.created_at|date:"F j, Y" }}</td>
                                     <td>
-                                        <a href="{% url 'quiz:quiz_results' attempt.id %}" class="btn btn-sm btn-primary">View Results</a>
+                                        <div class="btn-group">
+                                            <a href="{% url 'quiz:quiz_results' attempt.id %}" class="btn btn-sm btn-primary">View Results</a>
+                                            <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal{{ attempt.id }}">
+                                                <i class="bi bi-trash"></i>
+                                            </button>
+                                        </div>
+
+                                        <!-- Delete Modal -->
+                                        <div class="modal fade" id="deleteModal{{ attempt.id }}" tabindex="-1" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title">Confirm Deletion</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <p>Are you sure you want to delete this quiz attempt?</p>
+                                                        <div class="attempt-details">
+                                                            <p><strong>Quiz:</strong> {{ attempt.quiz.title }}</p>
+                                                            <p><strong>Score:</strong> {{ attempt.score }}%</p>
+                                                            <p><strong>Date:</strong> {{ attempt.created_at|date:"F j, Y" }}</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                                        <a href="{% url 'quiz:delete_quiz_attempt' attempt.id %}" class="btn btn-danger">Delete</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </td>
                                 </tr>
                                 {% empty %}

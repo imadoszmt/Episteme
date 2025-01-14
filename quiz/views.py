@@ -236,3 +236,10 @@ def c_programming_quiz(request):
 def networking_quiz(request):
     questions = get_quiz_questions('networking')
     return render(request, 'quiz/networking_quiz.html', {'questions': questions})
+
+@login_required
+def delete_quiz_attempt(request, attempt_id):
+    attempt = get_object_or_404(QuizAttempt, id=attempt_id, user=request.user)
+    attempt.delete()
+    messages.success(request, 'Quiz attempt deleted successfully.')
+    return redirect('quiz:profile_view')
