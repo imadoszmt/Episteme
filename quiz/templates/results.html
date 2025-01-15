@@ -52,7 +52,7 @@
         </div>
 
         <div class="action-buttons text-center mt-5">
-            <a href="{% url 'quiz:quiz_detail' quiz_attempt.quiz.id %}" class="btn btn-primary me-3">Retake Quiz</a>
+            <a href="{% url 'quiz:quiz_question' quiz_attempt.quiz.id user_answers.0.question.id %}" class="btn btn-primary me-3">Retake Quiz</a>
             <a href="{% url 'quiz:quiz_list' %}" class="btn btn-secondary">Back to Quizzes</a>
         </div>
     </div>
@@ -170,7 +170,7 @@
         padding: 0.75rem 2rem;
         border-radius: 25px;
         font-weight: 500;
-        text-transform: uppercase;
+        /*text-transform: uppercase;*/
         letter-spacing: 0.5px;
     }
 </style>
