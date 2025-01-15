@@ -133,11 +133,17 @@
 
     .quiz-table tbody tr {
         background-color: var(--bg-secondary);
-        transition: transform 0.2s ease;
+        /* Removed transform transition to prevent layout shifts */
+        /* transition: transform 0.2s ease; */
     }
 
     .quiz-table tbody tr:hover {
-        transform: scale(1.01);
+        /* Removed scale transform to eliminate shaking */
+        /* transform: scale(1.01); */
+        /* Optional: Add a subtle background change for hover effect */
+        background-color: #e9ecef;
+        /* Optional: Add a slight box-shadow for visual feedback */
+        box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1);
     }
 
     .quiz-table td {
@@ -213,6 +219,8 @@
     .modal-content {
         background-color: var(--card-bg);
         color: var(--text-primary);
+        transition: none;
+        transform: none;
     }
     
     .modal-header, .modal-footer {
@@ -230,7 +238,15 @@
         margin-bottom: 0;
     }
 
-   
+    .modal-dialog {
+        transition: none;
+        transform: none;
+    }
+
+    .modal.fade .modal-dialog {
+        transition: none;
+    }
+
     body {
         min-height: 100vh;
         display: flex;
@@ -311,17 +327,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                {% empty %}
-                                <tr>
-                                    <td colspan="4" class="text-center">No quizzes taken yet</td>
-                                </tr>
-                                {% endfor %}
-                            </tbody>
-                        </table>
-                    </div>
+                                        </div>                                    </td>                                </tr>                                {% empty %}                                <tr>                                    <td colspan="4" class="text-center">No quizzes taken yet</td>                                </tr>                                {% endfor %}                            </tbody>                        </table>                    </div>
                 </div>
             </div>
         </div>
